@@ -1,0 +1,12 @@
+build
+node_modules/**/*
+.github
+apps/aladdin-project-web-e2e
+package.json
+package-lock.json
+.prettierrc
+.prettierignore
+next-env.d.ts
+README.md
+.eslintrc.json
+tsconfig.json
