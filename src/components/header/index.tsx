@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { Link as ReachRouterLink } from 'react-router-dom';
+
 import {
-  Container,
-  Group,
   Background,
+  ButtonLink,
+  Container,
   Dropdown,
-  Picture,
-  Link,
-  Search,
-  Profile,
+  Feature,
   FeatureCallOut,
+  Group,
+  Link,
+  Logo,
+  Picture,
+  PlayButton,
+  Profile,
+  Search,
   SearchIcon,
   SearchInput,
-  ButtonLink,
-  PlayButton,
   Text,
-  Feature,
-  Logo,
 } from './styles/header';
 
 export default function Header({ bg = true, children, ...restProps }) {

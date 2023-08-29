@@ -6,7 +6,8 @@
         "@typescript-eslint",
         "unused-imports",
         "prettier",
-        "simple-import-sort"
+        "simple-import-sort",
+        "import"
     ],
     "extends": [
         "standard",
@@ -17,7 +18,8 @@
         "prettier"
     ],
     "env": {
-        "node": true
+        "node": true,
+        "es6": true
     },
     "parserOptions": {
         "ecmaVersion": 2022, // Allows for the parsing of modern ECMAScript features
@@ -28,7 +30,7 @@
         }
     },
     "rules": {
-        "space-before-function-paren": 0,
+        "space-before-function-paren": 0, 
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
         "import/first": "error",

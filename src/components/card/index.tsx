@@ -1,21 +1,21 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { createContext,useContext, useState } from 'react';
 
 import {
   Container,
+  Content,
+  Entities,
+  Feature,
+  FeatureClose,
+  FeatureText,
+  FeatureTitle,
   Group,
-  Title,
+  Image,
+  Item,
+  Maturity,
+  Meta,
   SubTitle,
   Text,
-  Feature,
-  FeatureTitle,
-  FeatureText,
-  FeatureClose,
-  Maturity,
-  Content,
-  Meta,
-  Entities,
-  Item,
-  Image,
+  Title,
 } from './styles/card';
 
 export const FeatureContext = createContext();

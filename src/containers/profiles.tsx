@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Header, Profiles } from '../components';
 import * as ROUTES from '../constants/routes';
 import logo from '../logo.svg';

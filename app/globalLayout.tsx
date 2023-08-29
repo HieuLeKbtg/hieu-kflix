@@ -1,22 +1,20 @@
-import { FirebaseContext } from '@/context/firebase'
 import { ReactNode } from 'react'
+import { FirebaseContext } from 'src/context'
 import { GlobalStyles } from 'src/global-styles'
-// import { FirebaseContext } from '@/src'
-// import { GlobalStyles } from '@/src/global-styles'
-// import { firebase } from '@/lib'
-import { firebaseProd } from '@/lib/firebase.prod'
+import {firebaseProd} from 'src/lib'
 
-type RootLayoutProps = {
-  children: ReactNode
+type RootLayoutProps = { 
+    children: ReactNode
 }
+
 const RootLayout = (props: RootLayoutProps) => {
-  const { children } = props
-  return (
-    <FirebaseContext.Provider value={{ firebaseProd }}>
-      <GlobalStyles />
-      {children}
-    </FirebaseContext.Provider>
-  )
+    const { children } = props
+    return (
+        <FirebaseContext.Provider value={{ firebaseProd }}>
+            <GlobalStyles />
+            {children}
+        </FirebaseContext.Provider>
+    )
 }
 
 export default RootLayout

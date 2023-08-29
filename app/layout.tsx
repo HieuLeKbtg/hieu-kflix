@@ -5,7 +5,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <html lang='en'>
             <body>
                 {/* <Global */}
-                {children}
+                {children} 
             </body>
         </html>
     )
