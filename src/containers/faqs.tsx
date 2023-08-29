@@ -1,27 +1,30 @@
-import React from 'react';
+import React from 'react'
+import { faqData } from 'src/fixtures'
 
-import { Accordion, OptForm } from '../components';
-import faqsData from '../fixtures/faqs';
+import { Accordion, OptForm } from '../components'
 
 export function FaqsContainer() {
-  return (
-    <Accordion>
-      <Accordion.Title>Frequently Asked Questions</Accordion.Title>
-      <Accordion.Frame>
-        {faqsData.map((item) => (
-          <Accordion.Item key={item.id}>
-            <Accordion.Header>{item.header}</Accordion.Header>
-            <Accordion.Body>{item.body}</Accordion.Body>
-          </Accordion.Item>
-        ))}
-      </Accordion.Frame>
+    return (
+        <Accordion>
+            <Accordion.Title>Frequently Asked Questions</Accordion.Title>
+            <Accordion.Frame>
+                {faqData.map((item) => (
+                    <Accordion.Item key={item.id}>
+                        <Accordion.Header>{item.header}</Accordion.Header>
+                        <Accordion.Body>{item.body}</Accordion.Body>
+                    </Accordion.Item>
+                ))}
+            </Accordion.Frame>
 
-      <OptForm>
-        <OptForm.Input placeholder="Email address" />
-        <OptForm.Button>Try it now</OptForm.Button>
-        <OptForm.Break />
-        <OptForm.Text>Ready to watch? Enter your email to create or restart your membership.</OptForm.Text>
-      </OptForm>
-    </Accordion>
-  );
+            <OptForm>
+                <OptForm.Input placeholder='Email address' />
+                <OptForm.Button>Try it now</OptForm.Button>
+                <OptForm.Break />
+                <OptForm.Text>
+                    Ready to watch? Enter your email to create or restart your
+                    membership.
+                </OptForm.Text>
+            </OptForm>
+        </Accordion>
+    )
 }

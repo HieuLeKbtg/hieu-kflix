@@ -9,16 +9,19 @@
         "lint": "next lint --fix"
     },
     "dependencies": {
+        "@babel/core": "^7.22.11",
         "@types/node": "20.5.7",
         "@types/react": "18.2.21",
         "@types/react-dom": "18.2.7",
+        "babel-plugin-macros": "^3.1.0",
+        "babel-plugin-styled-components": "^2.1.4",
         "firebase": "^10.3.0",
+        "fs": "^0.0.1-security",
         "fuse.js": "^6.6.2",
         "next": "13.4.19",
         "normalize.css": "^8.0.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-router-dom": "^6.15.0",
         "styled-components": "^6.0.7",
         "typescript": "^5.2.2"
     },
@@ -48,7 +51,7 @@
         "eslint-plugin-simple-import-sort": "^10.0.0",
         "eslint-plugin-unused-imports": "1.1.5",
         "jest": "27.0.3",
-        "prettier": "^3.0.2",
+        "prettier": "^2.5.1",
         "prettier-eslint": "^13.0.0",
         "standard": "^16.0.4",
         "typescript-eslint": "^0.0.1-alpha.0"
