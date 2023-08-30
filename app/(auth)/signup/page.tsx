@@ -3,9 +3,19 @@
 import { appRoutes } from 'app/routes'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useState } from 'react'
-import { Form } from 'src/components'
-import { FooterContainer } from 'src/containers/footer'
-import { HeaderContainer } from 'src/containers/header'
+import {
+    FooterContainer,
+    FormBase,
+    FormContainer,
+    FormError,
+    FormInput,
+    FormLink,
+    FormSubmit,
+    FormText,
+    FormTextSmall,
+    FormTitle
+} from 'src/components'
+import HeaderContainer from 'src/containers/header'
 import { FirebaseContext } from 'src/context'
 
 export default function SignUp() {
@@ -46,19 +56,19 @@ export default function SignUp() {
     return (
         <>
             <HeaderContainer>
-                <Form>
-                    <Form.Title>Sign Up</Form.Title>
-                    {error && <Form.Error>{error}</Form.Error>}
+                <FormContainer>
+                    <FormTitle>Sign Up</FormTitle>
+                    {error && <FormError>{error}</FormError>}
 
-                    <Form.Base onSubmit={handleSignup} method='POST'>
-                        <Form.Input
+                    <FormBase onSubmit={handleSignup} method='POST'>
+                        <FormInput
                             placeholder='First name'
                             value={firstName}
                             onChange={({ target }) =>
                                 setFirstName((target as HTMLInputElement).value)
                             }
                         />
-                        <Form.Input
+                        <FormInput
                             placeholder='Email address'
                             value={emailAddress}
                             onChange={({ target }) =>
@@ -67,7 +77,7 @@ export default function SignUp() {
                                 )
                             }
                         />
-                        <Form.Input
+                        <FormInput
                             type='password'
                             value={password}
                             autoComplete='off'
@@ -76,24 +86,24 @@ export default function SignUp() {
                                 setPassword((target as HTMLInputElement).value)
                             }
                         />
-                        <Form.Submit
+                        <FormSubmit
                             disabled={isInvalid}
                             type='submit'
                             data-testid='sign-up'
                         >
                             Sign Up
-                        </Form.Submit>
-                    </Form.Base>
+                        </FormSubmit>
+                    </FormBase>
 
-                    <Form.Text>
+                    <FormText>
                         Already a user?{' '}
-                        <Form.Link to='/signin'>Sign in now.</Form.Link>
-                    </Form.Text>
-                    <Form.TextSmall>
+                        <FormLink href='/signin'>Sign in now</FormLink>
+                    </FormText>
+                    <FormTextSmall>
                         This page is protected by Google reCAPTCHA to ensure
-                        you're not a bot. Learn more.
-                    </Form.TextSmall>
-                </Form>
+                        you're not a bot Learn more
+                    </FormTextSmall>
+                </FormContainer>
             </HeaderContainer>
             <FooterContainer />
         </>

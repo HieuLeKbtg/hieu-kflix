@@ -1,4 +1,3 @@
-'use client'
 export * from './browse'
 export * from './faqs'
 export * from './footer'

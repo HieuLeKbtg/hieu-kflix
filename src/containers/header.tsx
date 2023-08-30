@@ -1,18 +1,23 @@
 import { appRoutes } from 'app/routes'
-import React from 'react'
+import React, { ReactNode } from 'react'
+import {
+    Header,
+    HeaderButtonLink,
+    HeaderFrame,
+    HeaderLogo
+} from 'src/components/header'
 
-import { Header } from '../components'
 import logo from '../logo.svg'
 
-export function HeaderContainer({ children }) {
+export default function HeaderContainer({ children }: { children: ReactNode }) {
     return (
         <Header>
-            <Header.Frame>
-                <Header.Logo to={appRoutes.HOME} src={logo} alt='Netflix' />
-                <Header.ButtonLink to={appRoutes.SIGN_IN}>
+            <HeaderFrame>
+                <HeaderLogo to={appRoutes.HOME} src={logo} alt='Netflix' />
+                <HeaderButtonLink href={appRoutes.SIGN_IN}>
                     Sign In
-                </Header.ButtonLink>
-            </Header.Frame>
+                </HeaderButtonLink>
+            </HeaderFrame>
             {children}
         </Header>
     )

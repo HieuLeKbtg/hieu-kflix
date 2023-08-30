@@ -1,30 +1,43 @@
 import React from 'react'
+import {
+    AccordionBody,
+    AccordionContainer,
+    AccordionFrame,
+    AccordionHeader,
+    AccordionItem,
+    AccordionTitle
+} from 'src/components/accordion'
+import {
+    OptFormBreak,
+    OptFormButton,
+    OptFormContainer,
+    OptFormInput,
+    OptFormText
+} from 'src/components/opt-form'
 import { faqData } from 'src/fixtures'
 
-import { Accordion, OptForm } from '../components'
-
-export function FaqsContainer() {
+export default function FaqsContainer() {
     return (
-        <Accordion>
-            <Accordion.Title>Frequently Asked Questions</Accordion.Title>
-            <Accordion.Frame>
+        <AccordionContainer>
+            <AccordionTitle>Frequently Asked Questions</AccordionTitle>
+            <AccordionFrame>
                 {faqData.map((item) => (
-                    <Accordion.Item key={item.id}>
-                        <Accordion.Header>{item.header}</Accordion.Header>
-                        <Accordion.Body>{item.body}</Accordion.Body>
-                    </Accordion.Item>
+                    <AccordionItem key={item.id}>
+                        <AccordionHeader>{item.header}</AccordionHeader>
+                        <AccordionBody>{item.body}</AccordionBody>
+                    </AccordionItem>
                 ))}
-            </Accordion.Frame>
+            </AccordionFrame>
 
-            <OptForm>
-                <OptForm.Input placeholder='Email address' />
-                <OptForm.Button>Try it now</OptForm.Button>
-                <OptForm.Break />
-                <OptForm.Text>
+            <OptFormContainer>
+                <OptFormInput placeholder='Email address' />
+                <OptFormButton>Try it now</OptFormButton>
+                <OptFormBreak />
+                <OptFormText>
                     Ready to watch? Enter your email to create or restart your
-                    membership.
-                </OptForm.Text>
-            </OptForm>
-        </Accordion>
+                    membership
+                </OptFormText>
+            </OptFormContainer>
+        </AccordionContainer>
     )
 }

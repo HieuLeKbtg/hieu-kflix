@@ -1,85 +1,93 @@
-import { LinkProps } from 'next/link'
-import React, { HTMLAttributes, ReactNode } from 'react'
+'use client'
 
-import {
-    Base,
-    Container,
-    Error,
-    Input,
-    Submit,
-    Text,
-    TextSmall,
-    Title
-} from './styles/form'
+import Link from 'next/link'
+import styled from 'styled-components/macro'
 
-type FormProps<T> = T & { children?: ReactNode | ReactNode[] }
-export default function Form({
-    children,
-    ...restProps
-}: FormProps<HTMLAttributes<HTMLDivElement>>) {
-    return <Container {...restProps}>{children}</Container>
-}
+export const FormContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 660px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
+    max-width: 450px;
+    padding: 60px 68px 40px;
+    margin-bottom: 100px;
+`
 
-Form.Error = function FormError({
-    children,
-    ...restProps
-}: FormProps<HTMLAttributes<HTMLDivElement>>) {
-    return <Error {...restProps}>{children}</Error>
-}
+export const FormError = styled.div`
+    background: #e87c03;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 0 16px;
+    color: white;
+    padding: 15px 20px;
+`
 
-Form.Base = function FormBase({
-    children,
-    ...restProps
-}: FormProps<HTMLAttributes<HTMLFormElement> & { method: string }>) {
-    return <Base {...restProps}>{children}</Base>
-}
+export const FormBase = styled.form`
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    width: 100%;
+`
 
-Form.Title = function FormTitle({
-    children,
-    ...restProps
-}: FormProps<HTMLAttributes<HTMLHeadingElement>>) {
-    return <Title {...restProps}>{children}</Title>
-}
+export const FormTitle = styled.h1`
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 28px;
+`
 
-Form.Text = function FormText({ children, ...restProps }) {
-    return <Text {...restProps}>{children}</Text>
-}
+export const FormText = styled.p`
+    color: #737373;
+    font-size: 16px;
+    font-weight: 500;
+`
 
-Form.TextSmall = function FormTextSmall({
-    children,
-    ...restProps
-}: FormProps<HTMLAttributes<HTMLParagraphElement>>) {
-    return <TextSmall {...restProps}>{children}</TextSmall>
-}
+export const FormTextSmall = styled.p`
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: normal;
+    color: #8c8c8c;
+`
 
-Form.Link = function FormLink({
-    children,
-    ...restProps
-}: FormProps<LinkProps>) {
-    return <FormLink {...restProps}>{children}</FormLink>
-}
+export const FormLink = styled(Link)`
+    color: #fff;
+    text-decoration: none;
 
-Form.Input = function FormInput({
-    children,
-    ...restProps
-}: FormProps<
-    HTMLAttributes<HTMLInputElement> & {
-        value: string
-        type?: string
-        autoComplete?: string
+    &:hover {
+        text-decoration: underline;
     }
->) {
-    return <Input {...restProps}>{children}</Input>
-}
+`
 
-Form.Submit = function FormSubmit({
-    children,
-    ...restProps
-}: FormProps<
-    HTMLAttributes<HTMLButtonElement> & {
-        disabled: boolean
-        type: 'button' | 'submit' | 'reset'
+export const FormInput = styled.input`
+    background: #333;
+    border-radius: 4px;
+    border: 0;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    padding: 5px 20px;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+        margin-bottom: 30px;
     }
->) {
-    return <Submit {...restProps}>{children}</Submit>
-}
+`
+
+export const FormSubmit = styled.button`
+    background: #e50914;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 24px 0 12px;
+    padding: 16px;
+    border: 0;
+    color: white;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+`

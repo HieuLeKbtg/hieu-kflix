@@ -1,31 +1,80 @@
-import React from 'react';
+'use client'
+import React from 'react'
+import { styled } from 'styled-components/macro'
 
-import { Container, Image,Inner, Item, Pane, SubTitle, Title } from './styles/jumbotron';
-
-export default function Jumbotron({ children, direction = 'row', ...restProps }) {
-  return (
-    <Item {...restProps}>
-      <Inner direction={direction}>{children}</Inner>
-    </Item>
-  );
+type JumbotronInnerProps = {
+    direction: string
 }
 
-Jumbotron.Container = function JumbotronContainer({ children, ...restProps }) {
-  return <Container {...restProps}>{children}</Container>;
-};
+export const JumbotronInner = styled.div<JumbotronInnerProps>`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: ${({ direction }: JumbotronInnerProps) => direction};
+    max-width: 1100px;
+    margin: auto;
+    width: 100%;
 
-Jumbotron.Pane = function JumbotronPane({ children, ...restProps }) {
-  return <Pane {...restProps}>{children}</Pane>;
-};
+    @media (max-width: 1000px) {
+        flex-direction: column;
+    }
+`
 
-Jumbotron.Title = function JumbotronTitle({ children, ...restProps }) {
-  return <Title {...restProps}>{children}</Title>;
-};
+export const JumbotronItem = styled.div`
+    display: flex;
+    border-bottom: 8px solid #222;
+    padding: 50px 5%;
+    color: white;
+    overflow: hidden;
+`
 
-Jumbotron.SubTitle = function JumbotronSubTitle({ children, ...restProps }) {
-  return <SubTitle {...restProps}>{children}</SubTitle>;
-};
+export const JumbotronContainer = styled.div`
+    @media (max-width: 1000px) {
+        ${JumbotronItem}:last-of-type h2 {
+            margin-bottom: 50px;
+        }
+    }
+`
 
-Jumbotron.Image = function JumbotronImage({ ...restProps }) {
-  return <Image {...restProps} />;
-};
+export const JumbotronPane = styled.div`
+    width: 50%;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        padding: 0 45px;
+        text-align: center;
+    }
+`
+
+export const JumbotronTitle = styled.h1`
+    font-size: 50px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+
+    @media (max-width: 600px) {
+        font-size: 35px;
+    }
+`
+
+export const JumbotronSubTitle = styled.h2`
+    font-size: 26px;
+    font-weight: normal;
+    line-height: normal;
+
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
+`
+
+export const JumbotronImage = styled.img`
+    max-width: 100%;
+    height: auto;
+`
+
+export const Jumbotron = ({ children, direction = 'row', ...restProps }) => {
+    return (
+        <JumbotronItem {...restProps}>
+            <JumbotronInner direction={direction}>{children}</JumbotronInner>
+        </JumbotronItem>
+    )
+}

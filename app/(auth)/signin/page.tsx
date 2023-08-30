@@ -3,9 +3,19 @@
 import { appRoutes } from 'app/routes'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useState } from 'react'
-import { Form } from 'src/components'
-import { FooterContainer } from 'src/containers/footer'
-import { HeaderContainer } from 'src/containers/header'
+import {
+    FooterContainer,
+    FormBase,
+    FormContainer,
+    FormError,
+    FormInput,
+    FormLink,
+    FormSubmit,
+    FormText,
+    FormTextSmall,
+    FormTitle
+} from 'src/components'
+import HeaderContainer from 'src/containers/header'
 import { FirebaseContext } from 'src/context'
 
 export default function SignIn() {
@@ -37,14 +47,14 @@ export default function SignIn() {
     return (
         <>
             <HeaderContainer>
-                <Form>
-                    <Form.Title>Sign In</Form.Title>
+                <FormContainer>
+                    <FormTitle>Sign In</FormTitle>
                     {error && (
-                        <Form.Error data-testid='error'>{error}</Form.Error>
+                        <FormError data-testid='error'>{error}</FormError>
                     )}
 
-                    <Form.Base onSubmit={handleSignin} method='POST'>
-                        <Form.Input
+                    <FormBase onSubmit={handleSignin} method='POST'>
+                        <FormInput
                             placeholder='Email address'
                             value={emailAddress}
                             onChange={({ target }) =>
@@ -53,7 +63,7 @@ export default function SignIn() {
                                 )
                             }
                         />
-                        <Form.Input
+                        <FormInput
                             type='password'
                             value={password}
                             autoComplete='off'
@@ -62,24 +72,24 @@ export default function SignIn() {
                                 setPassword((target as HTMLInputElement).value)
                             }
                         />
-                        <Form.Submit
+                        <FormSubmit
                             disabled={isInvalid}
                             type='submit'
                             data-testid='sign-in'
                         >
                             Sign In
-                        </Form.Submit>
-                    </Form.Base>
+                        </FormSubmit>
+                    </FormBase>
 
-                    <Form.Text>
+                    <FormText>
                         New to Netflix?{' '}
-                        <Form.Link href='/signup'>Sign up now.</Form.Link>
-                    </Form.Text>
-                    <Form.TextSmall>
+                        <FormLink href='/signup'>Sign up now</FormLink>
+                    </FormText>
+                    <FormTextSmall>
                         This page is protected by Google reCAPTCHA to ensure
-                        you're not a bot. Learn more.
-                    </Form.TextSmall>
-                </Form>
+                        you're not a bot Learn more
+                    </FormTextSmall>
+                </FormContainer>
             </HeaderContainer>
             <FooterContainer />
         </>

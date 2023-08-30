@@ -4,10 +4,39 @@ import { appRoutes } from 'app/routes'
 import Fuse from 'fuse.js'
 import React, { useContext, useEffect, useState } from 'react'
 
-import { Card, Header, Loading, Player } from '../components'
+import {
+    Card,
+    CardEntities,
+    CardGroup,
+    CardImage,
+    CardMeta,
+    CardSubTitle,
+    CardText,
+    CardTitle,
+    FooterContainer,
+    Header,
+    HeaderDropdown,
+    HeaderFeature,
+    HeaderFeatureCallOut,
+    HeaderFrame,
+    HeaderGroup,
+    HeaderLink,
+    HeaderLogo,
+    HeaderPicture,
+    HeaderPlayButton,
+    HeaderProfile,
+    HeaderSearch,
+    HeaderText,
+    Loading,
+    MainCardFeature,
+    MainCardItem,
+    Player,
+    PlayerButton,
+    PlayerVideo,
+    ReleaseBody
+} from '../components'
 import { FirebaseContext } from '../context/firebase'
 import logo from '../logo.svg'
-import { FooterContainer } from './footer'
 import { SelectProfileContainer } from './profiles'
 
 export function BrowseContainer({ slides }) {
@@ -24,6 +53,8 @@ export function BrowseContainer({ slides }) {
         setTimeout(() => {
             setLoading(false)
         }, 3000)
+        // @ts-ignore
+        // TOOD: add type here
     }, [profile.displayName])
 
     useEffect(() => {
@@ -47,108 +78,100 @@ export function BrowseContainer({ slides }) {
         }
     }, [searchTerm, slides, category, slideRows])
 
+    // @ts-ignore
+    // TOOD: add type here
     return profile.displayName ? (
         <>
-            {loading ? (
-                <Loading src={user.photoURL} />
-            ) : (
-                <Loading.ReleaseBody />
-            )}
+            {loading ? <Loading src={user.photoURL} /> : <ReleaseBody />}
 
             <Header src='joker1' dontShowOnSmallViewPort>
-                <Header.Frame>
-                    <Header.Group>
-                        <Header.Logo
+                <HeaderFrame>
+                    <HeaderGroup>
+                        <HeaderLogo
                             to={appRoutes.HOME}
                             src={logo}
                             alt='Netflix'
                         />
-                        <Header.TextLink
+                        <HeaderLink
                             active={category === 'series' ? 'true' : 'false'}
                             onClick={() => setCategory('series')}
                         >
                             Series
-                        </Header.TextLink>
-                        <Header.TextLink
+                        </HeaderLink>
+                        <HeaderLink
                             active={category === 'films' ? 'true' : 'false'}
                             onClick={() => setCategory('films')}
                         >
                             Films
-                        </Header.TextLink>
-                    </Header.Group>
-                    <Header.Group>
-                        <Header.Search
+                        </HeaderLink>
+                    </HeaderGroup>
+                    <HeaderGroup>
+                        <HeaderSearch
                             searchTerm={searchTerm}
                             setSearchTerm={setSearchTerm}
                         />
-                        <Header.Profile>
-                            <Header.Picture src={user.photoURL} />
-                            <Header.Dropdown>
-                                <Header.Group>
-                                    <Header.Picture src={user.photoURL} />
-                                    <Header.TextLink>
-                                        {user.displayName}
-                                    </Header.TextLink>
-                                </Header.Group>
-                                <Header.Group>
-                                    <Header.TextLink
+                        <HeaderProfile>
+                            <HeaderPicture src={user.photoURL} />
+                            <HeaderDropdown>
+                                <HeaderGroup>
+                                    <HeaderPicture src={user.photoURL} />
+                                    <HeaderLink>{user.displayName}</HeaderLink>
+                                </HeaderGroup>
+                                <HeaderGroup>
+                                    <HeaderLink
                                         onClick={() =>
                                             firebase.auth().signOut()
                                         }
                                     >
                                         Sign out
-                                    </Header.TextLink>
-                                </Header.Group>
-                            </Header.Dropdown>
-                        </Header.Profile>
-                    </Header.Group>
-                </Header.Frame>
+                                    </HeaderLink>
+                                </HeaderGroup>
+                            </HeaderDropdown>
+                        </HeaderProfile>
+                    </HeaderGroup>
+                </HeaderFrame>
 
-                <Header.Feature>
-                    <Header.FeatureCallOut>
-                        Watch Joker Now
-                    </Header.FeatureCallOut>
-                    <Header.Text>
+                <HeaderFeature>
+                    <HeaderFeatureCallOut>Watch Joker Now</HeaderFeatureCallOut>
+                    <HeaderText>
                         Forever alone in a crowd, failed comedian Arthur Fleck
                         seeks connection as he walks the streets of Gotham City.
                         Arthur wears two masks -- the one he paints for his day
                         job as a clown, and the guise he projects in a futile
                         attempt to feel like he's part of the world around him.
-                    </Header.Text>
-                    <Header.PlayButton>Play</Header.PlayButton>
-                </Header.Feature>
+                    </HeaderText>
+                    <HeaderPlayButton>Play</HeaderPlayButton>
+                </HeaderFeature>
             </Header>
 
-            <Card.Group>
+            <CardGroup>
                 {slideRows.map((slideItem) => (
                     <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-                        <Card.Title>{slideItem.title}</Card.Title>
-                        <Card.Entities>
+                        <CardTitle>{slideItem.title}</CardTitle>
+                        <CardEntities>
                             {slideItem.data.map((item) => (
-                                <Card.Item key={item.docId} item={item}>
-                                    <Card.Image
+                                <MainCardItem key={item.docId} item={item}>
+                                    <CardImage
                                         src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
                                     />
-                                    <Card.Meta>
-                                        <Card.SubTitle>
+                                    <CardMeta>
+                                        <CardSubTitle>
                                             {item.title}
-                                        </Card.SubTitle>
-                                        <Card.Text>
-                                            {item.description}
-                                        </Card.Text>
-                                    </Card.Meta>
-                                </Card.Item>
+                                        </CardSubTitle>
+                                        <CardText>{item.description}</CardText>
+                                    </CardMeta>
+                                </MainCardItem>
                             ))}
-                        </Card.Entities>
-                        <Card.Feature category={category}>
+                        </CardEntities>
+                        <MainCardFeature category={category}>
                             <Player>
-                                <Player.Button />
-                                <Player.Video src='/videos/bunny.mp4' />
+                                <PlayerButton />
+                                <PlayerVideo src='/videos/bunny.mp4' />
                             </Player>
-                        </Card.Feature>
+                        </MainCardFeature>
                     </Card>
                 ))}
-            </Card.Group>
+            </CardGroup>
             <FooterContainer />
         </>
     ) : (

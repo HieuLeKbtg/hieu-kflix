@@ -1,35 +1,45 @@
 import { appRoutes } from 'app/routes'
 import React from 'react'
 
-import { Header, Profiles } from '../components'
+import {
+    Header,
+    HeaderFrame,
+    HeaderLogo,
+    MainProfilesPicture,
+    ProfilesContainer,
+    ProfilesItem,
+    ProfilesList,
+    ProfilesName,
+    ProfilesTitle
+} from '../components'
 import logo from '../logo.svg'
 
 export function SelectProfileContainer({ user, setProfile }) {
     return (
         <>
             <Header bg={false}>
-                <Header.Frame>
-                    <Header.Logo to={appRoutes.HOME} src={logo} alt='Netflix' />
-                </Header.Frame>
+                <HeaderFrame>
+                    <HeaderLogo to={appRoutes.HOME} src={logo} alt='Netflix' />
+                </HeaderFrame>
             </Header>
 
-            <Profiles>
-                <Profiles.Title>Who's watching?</Profiles.Title>
-                <Profiles.List>
-                    <Profiles.User
+            <ProfilesContainer>
+                <ProfilesTitle>Who's watching?</ProfilesTitle>
+                <ProfilesList>
+                    <ProfilesItem
                         onClick={() =>
                             setProfile({
-                                displayName: user.displayName,
-                                photoURL: user.photoURL
+                                displayName: user.userdisplayName,
+                                photoURL: user.userphotoURL
                             })
                         }
                         data-testid='user-profile'
                     >
-                        <Profiles.Picture src={user.photoURL} />
-                        <Profiles.Name>{user.displayName}</Profiles.Name>
-                    </Profiles.User>
-                </Profiles.List>
-            </Profiles>
+                        <MainProfilesPicture src={user.userphotoURL} />
+                        <ProfilesName>{user.userdisplayName}</ProfilesName>
+                    </ProfilesItem>
+                </ProfilesList>
+            </ProfilesContainer>
         </>
     )
 }

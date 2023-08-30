@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from 'react'
 import { FirebaseContext } from 'src/context'
 import { GlobalStyles } from 'src/global-styles'
@@ -12,8 +13,8 @@ const GlobalLayout = (props: GlobalLayoutProps) => {
     const { children } = props
     return (
         <StyledComponentsRegistry>
-            <GlobalStyles />
             <FirebaseContext.Provider value={{ firebaseProd }}>
+                <GlobalStyles />
                 {children}
             </FirebaseContext.Provider>
         </StyledComponentsRegistry>
