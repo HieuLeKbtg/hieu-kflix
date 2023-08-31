@@ -4,7 +4,6 @@ import { appRoutes } from 'app/routes'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useState } from 'react'
 import {
-    FooterContainer,
     FormBase,
     FormContainer,
     FormError,
@@ -15,6 +14,7 @@ import {
     FormTextSmall,
     FormTitle
 } from 'src/components'
+import MainFooter from 'src/containers/footer'
 import HeaderContainer from 'src/containers/header'
 import { FirebaseContext } from 'src/context'
 
@@ -91,7 +91,7 @@ export default function SignIn() {
                     </FormTextSmall>
                 </FormContainer>
             </HeaderContainer>
-            <FooterContainer />
+            <MainFooter />
         </>
     )
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import {
     AccordionBody,
-    AccordionContainer,
     AccordionFrame,
     AccordionHeader,
     AccordionItem,
-    AccordionTitle
+    AccordionTitle,
+    MainAccordion
 } from 'src/components/accordion'
 import {
     OptFormBreak,
@@ -18,7 +18,7 @@ import { faqData } from 'src/fixtures'
 
 export default function FaqsContainer() {
     return (
-        <AccordionContainer>
+        <MainAccordion>
             <AccordionTitle>Frequently Asked Questions</AccordionTitle>
             <AccordionFrame>
                 {faqData.map((item) => (
@@ -38,6 +38,6 @@ export default function FaqsContainer() {
                     membership
                 </OptFormText>
             </OptFormContainer>
-        </AccordionContainer>
+        </MainAccordion>
     )
 }

@@ -107,6 +107,14 @@ export const Body = styled.div`
 
 const ToggleContext = createContext(null)
 
+export function MainAccordion({ children, ...restProps }) {
+    return (
+        <AccordionContainer {...restProps}>
+            <AccordionInner>{children}</AccordionInner>
+        </AccordionContainer>
+    )
+}
+
 export const AccordionItem = ({ children, ...restProps }) => {
     const [toggleShow, setToggleShow] = useState(false)
 
