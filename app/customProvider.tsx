@@ -3,10 +3,11 @@
 import 'normalize.css'
 
 import { ReactNode } from 'react'
-import { FirebaseContext } from 'src/context'
-import { GlobalStyles } from 'src/global-styles'
-import { firebaseProd } from 'src/lib'
+// import { firebaseProd } from 'src/lib'
+// import { FirebaseContext } from 'src/context'
 import StyledComponentsRegistry from 'src/lib/styledComponentRegistry'
+
+import GlobalStyles from './globalStyles'
 
 type CustomProviderProps = {
     children: ReactNode
@@ -15,12 +16,12 @@ type CustomProviderProps = {
 const CustomProvider = (props: CustomProviderProps) => {
     const { children } = props
     return (
-        <FirebaseContext.Provider value={{ firebaseProd }}>
-            <StyledComponentsRegistry>
-                <GlobalStyles />
-                {children}
-            </StyledComponentsRegistry>
-        </FirebaseContext.Provider>
+        // <FirebaseContext.Provider value={{ firebaseProd }}>
+        <StyledComponentsRegistry>
+            <GlobalStyles />
+            {children}
+        </StyledComponentsRegistry>
+        // </FirebaseContext.Provider>
     )
 }
 

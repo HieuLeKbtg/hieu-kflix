@@ -8,7 +8,6 @@ export default function useAuthListener() {
     )
     const { firebase } = useContext(FirebaseContext)
 
-    console.log('firebase', firebase)
     useEffect(() => {
         const listener = firebase?.auth().onAuthStateChanged((authUser) => {
             if (authUser) {
@@ -20,7 +19,8 @@ export default function useAuthListener() {
             }
         })
 
-        return () => listener()
+        return () => {}
+        // return () => listener()
     }, [firebase])
 
     return { user }

@@ -1,7 +1,7 @@
 'use client'
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   *, *:before, *:after {
     box-sizing: border-box;
   }
@@ -14,3 +14,5 @@ export const GlobalStyles = createGlobalStyle`
     color: #333333;
     font-size: 16px;
 }`
+
+export default GlobalStyles
