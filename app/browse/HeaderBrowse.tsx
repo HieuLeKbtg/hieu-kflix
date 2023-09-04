@@ -1,7 +1,8 @@
 'use client'
 
 import { appRoutes } from 'app/routes'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import React, { useState } from 'react'
 import {
     Header,
     HeaderDropdown,
@@ -17,22 +18,16 @@ import {
     HeaderSearch,
     HeaderText
 } from 'src/components'
-import { CategoryType } from 'src/types'
 
-type HeaderBrowseProps = {
-    category: CategoryType
-    onSetCategory: Dispatch<SetStateAction<string>>
-}
-
-const HeaderBrowse = (props: HeaderBrowseProps) => {
-    const { category, onSetCategory } = props
+const HeaderBrowse = () => {
     const [searchTerm, setSearchTerm] = useState<string>('')
+    const pathname = usePathname()
 
     // TODO: get user here
     const user = { photoURL: '', displayName: 'Hieu Le' }
 
     return (
-        <Header src='joker1' dontShowOnSmallViewPort>
+        <Header src='joker1'>
             <HeaderFrame>
                 <HeaderGroup>
                     <HeaderLogo
@@ -41,14 +36,14 @@ const HeaderBrowse = (props: HeaderBrowseProps) => {
                         alt='Netflix'
                     />
                     <HeaderLink
-                        active={category === 'series' ? 'true' : 'false'}
-                        onClick={() => onSetCategory('series')}
+                        active={pathname === '/series' ? 'true' : 'false'}
+                        href='/series'
                     >
                         Series
                     </HeaderLink>
                     <HeaderLink
-                        active={category === 'films' ? 'true' : 'false'}
-                        onClick={() => onSetCategory('films')}
+                        active={pathname === '/films' ? 'true' : 'false'}
+                        href='films'
                     >
                         Films
                     </HeaderLink>
@@ -63,13 +58,16 @@ const HeaderBrowse = (props: HeaderBrowseProps) => {
                         <HeaderDropdown>
                             <HeaderGroup>
                                 <HeaderPicture src={user.photoURL} />
-                                <HeaderLink>{user.displayName}</HeaderLink>
+                                <HeaderLink href='#'>
+                                    {user.displayName}
+                                </HeaderLink>
                             </HeaderGroup>
                             <HeaderGroup>
                                 <HeaderLink
-                                    onClick={() => {
-                                        // firebase.auth().signOut()
-                                    }}
+                                    href='#'
+                                    // onClick={() => {
+                                    //     // firebase.auth().signOut()
+                                    // }}
                                 >
                                     Sign out
                                 </HeaderLink>

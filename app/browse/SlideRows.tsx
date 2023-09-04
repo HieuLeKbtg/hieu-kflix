@@ -14,12 +14,11 @@ import {
     PlayerButton,
     PlayerVideo
 } from 'src/components'
-import { CategoryType } from 'src/types'
 
 // TODO: add type here
 type SlideRowsProps = {
     slideRows: any[]
-    category: CategoryType
+    category: string
 }
 
 const SlideRows = (props: SlideRowsProps) => {

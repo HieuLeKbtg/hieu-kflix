@@ -91,10 +91,7 @@ export function Loading({ src, ...restProps }: { src: string }) {
     return (
         <Spinner {...restProps}>
             <LockBody />
-            <LoadingPicture
-                src={`/images/users/${src}.png`}
-                data-testid='loading-picture'
-            />
+            <LoadingPicture src={src} data-testid='loading-picture' />
         </Spinner>
     )
 }

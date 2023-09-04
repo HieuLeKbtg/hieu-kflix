@@ -46,7 +46,7 @@ export const HeaderContainer = styled.div`
     }
 `
 
-export const HeaderLink = styled.p<{ active?: 'true' | 'false' }>`
+export const HeaderLink = styled(Link)<{ active?: 'true' | 'false' }>`
     color: #fff;
     text-decoration: none;
     margin-right: 30px;
@@ -258,14 +258,15 @@ export const HeaderPlayButton = styled.button`
     }
 `
 
-export function Header({ bg = true, children, ...restProps }) {
-    return bg ? (
-        <HeaderBackground data-testid='header-bg' {...restProps}>
-            {children}
-        </HeaderBackground>
-    ) : (
-        children
-    )
+export const Header = ({ bg = true, children, ...restProps }) => {
+    if (bg) {
+        return (
+            <HeaderBackground data-testid='header-bg' {...restProps}>
+                {children}
+            </HeaderBackground>
+        )
+    }
+    return children
 }
 
 export const HeaderFrame = ({ children, ...restProps }) => {
