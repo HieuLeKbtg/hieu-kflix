@@ -3,18 +3,17 @@ import React, { createContext, useContext, useState } from 'react'
 import styled from 'styled-components/macro'
 
 export const CardTitle = styled.p`
-    font-size: 24px;
+    font-size: 18px;
     color: #e5e5e5;
     font-weight: bold;
-    margin-left: 56px;
-    margin-right: 56px;
     margin-top: 0;
 `
 
 export const CardContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+    text-align: center;
     margin-bottom: 50px;
+    margin: 0 36px 24px;
+    flex-basis: calc(25% - 72px);
 
     > ${CardTitle} {
         @media (max-width: 1000px) {
@@ -30,19 +29,17 @@ export const CardContainer = styled.div`
 export const CardGroup = styled.div<{
     flexDirection?: string
     alignItems?: string
+    justifyContent?: string
     margin?: string
+    flexWrap?: string
 }>`
     display: flex;
     flex-direction: ${({ flexDirection }) =>
         flexDirection === 'row' ? 'row' : 'column'};
     ${({ alignItems }) => alignItems && `align-items: ${alignItems}`};
     ${({ margin }) => margin && `margin: ${margin}`};
-
-    > ${CardContainer}:first-of-type {
-        @media (min-width: 1100px) {
-            margin-top: -100px;
-        }
-    }
+    flex-wrap: ${({ flexWrap }) => flexWrap || 'nowrap'};
+    justify-content: ${({ justifyContent }) => justifyContent || 'flex-start'};
 `
 
 export const CardSubTitle = styled.p`
@@ -57,7 +54,7 @@ export const CardSubTitle = styled.p`
 
 export const CardText = styled.p`
     margin-top: 5px;
-    font-size: 10px;
+    font-size: 14px;
     color: #fff;
     margin-bottom: 0;
     user-select: none;
@@ -65,10 +62,7 @@ export const CardText = styled.p`
     line-height: normal;
 `
 
-export const CardEntities = styled.div`
-    display: flex;
-    flex-direction: row;
-`
+export const CardEntities = styled.div``
 
 export const CardMeta = styled.div`
     display: none;
@@ -81,23 +75,20 @@ export const CardMeta = styled.div`
 export const CardImage = styled.img`
     border: 0;
     width: 100%;
-    max-width: 305px;
-    cursor: pointer;
     height: auto;
+    cursor: pointer;
     padding: 0;
     margin: 0;
 `
 
 export const CardItem = styled.div`
     display: flex;
-    flex-direction: column;
-    margin-right: 5px;
     position: relative;
     cursor: pointer;
     transition: transform 0.2s;
 
     &:hover {
-        transform: scale(1.3);
+        transform: scale(1.1);
         z-index: 99;
     }
 
@@ -105,22 +96,6 @@ export const CardItem = styled.div`
         &:hover ${CardMeta}, &:hover ${CardText}, &:hover ${CardSubTitle} {
             display: block;
             z-index: 100;
-        }
-    }
-
-    &:first-of-type {
-        margin-left: 56px;
-
-        @media (max-width: 1000px) {
-            margin-left: 30px;
-        }
-    }
-
-    &:last-of-type {
-        margin-right: 56px;
-
-        @media (max-width: 1000px) {
-            margin-right: 30px;
         }
     }
 `
@@ -141,9 +116,9 @@ export const CardFeature = styled.div<{ src: string }>`
     display: flex;
     flex-direction: row;
     background: url(${({ src }) => src});
-    background-size: contain;
+    background-size: 100% 100%;
     position: relative;
-    height: 360px;
+    padding: 24px;
     background-position-x: right;
     background-repeat: no-repeat;
     background-color: black;
@@ -183,10 +158,8 @@ export const CardFeatureClose = styled.button`
 `
 
 export const CardContent = styled.div`
-    margin: 56px;
-    max-width: 500px;
     line-height: normal;
-
+    text-align: left;
     @media (max-width: 1000px) {
         margin: 30px;
         max-width: none;
@@ -237,15 +210,18 @@ export const MainCardItem = ({ item, children, ...restProps }) => {
     )
 }
 
-export const MainCardFeature = ({ children, category, ...restProps }) => {
+export const MainCardFeature = (props) => {
+    const { children, url, genres, ...restProps } = props
     const { showFeature, itemFeature, setShowFeature } =
         useContext(FeatureContext)
 
+    const genresTextNode = genres.reduce((total, current) => {
+        if (!total) return current.name
+        return (total = `${total}, ${current.name}`)
+    }, '')
+
     return showFeature ? (
-        <CardFeature
-            {...restProps}
-            src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}
-        >
+        <CardFeature {...restProps} src={url}>
             <CardContent>
                 <CardFeatureTitle>{itemFeature.title}</CardFeatureTitle>
                 <CardFeatureText>{itemFeature.description}</CardFeatureText>
@@ -254,18 +230,17 @@ export const MainCardFeature = ({ children, category, ...restProps }) => {
                 </CardFeatureClose>
 
                 <CardGroup
-                    margin='30px 0'
+                    margin='18px 0'
                     flexDirection='row'
                     alignItems='center'
                 >
-                    <CardMaturity rating={itemFeature.maturity}>
+                    {/* <CardMaturity rating={itemFeature.maturity}>
                         {itemFeature.maturity < 12
                             ? 'PG'
                             : itemFeature.maturity}
-                    </CardMaturity>
+                    </CardMaturity> */}
                     <CardFeatureText fontWeight='bold'>
-                        {itemFeature.genre.charAt(0).toUpperCase() +
-                            itemFeature.genre.slice(1)}
+                        {genresTextNode}
                     </CardFeatureText>
                 </CardGroup>
 

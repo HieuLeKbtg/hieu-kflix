@@ -10,17 +10,19 @@ import {
 export default function HeaderContainer({ children }: { children: ReactNode }) {
     return (
         <Header>
-            <HeaderFrame>
-                <HeaderLogo
-                    to={appRoutes.HOME}
-                    src='/images/icons/logo.svg'
-                    alt='Netflix'
-                />
-                <HeaderButtonLink href={appRoutes.SIGN_IN}>
-                    Sign In
-                </HeaderButtonLink>
-            </HeaderFrame>
-            {children}
+            <>
+                <HeaderFrame>
+                    <HeaderLogo
+                        to={appRoutes.HOME}
+                        src='/images/icons/logo.svg'
+                        alt='Netflix'
+                    />
+                    <HeaderButtonLink href={appRoutes.SIGN_IN}>
+                        Sign In
+                    </HeaderButtonLink>
+                </HeaderFrame>
+                {children}
+            </>
         </Header>
     )
 }

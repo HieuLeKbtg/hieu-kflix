@@ -12,6 +12,7 @@ type HeaderBgProps = {
 export const HeaderBackground = styled.div<HeaderBgProps>`
     display: flex;
     flex-direction: column;
+    margin-bottom: 24px;
     background: linear-gradient(
             to bottom,
             rgba(0, 0, 0, 0.35),
@@ -46,11 +47,11 @@ export const HeaderContainer = styled.div`
     }
 `
 
-export const HeaderLink = styled(Link)<{ active?: 'true' | 'false' }>`
+export const HeaderLink = styled(Link)<{ active?: boolean }>`
     color: #fff;
     text-decoration: none;
     margin-right: 30px;
-    font-weight: ${({ active }) => (active === 'true' ? '700' : 'normal')};
+    font-weight: ${({ active }) => (active === true ? '700' : 'normal')};
     cursor: pointer;
 
     &:hover {
@@ -258,7 +259,12 @@ export const HeaderPlayButton = styled.button`
     }
 `
 
-export const Header = ({ bg = true, children, ...restProps }) => {
+export const Header = (props: {
+    src?: string
+    bg?: boolean
+    children: JSX.Element
+}) => {
+    const { bg = true, children, ...restProps } = props
     if (bg) {
         return (
             <HeaderBackground data-testid='header-bg' {...restProps}>

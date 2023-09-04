@@ -3,18 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import { Loading, ReleaseBody } from 'src/components'
 import MainFooter from 'src/containers/footer'
+import HeaderBrowse from 'src/containers/HeaderBrowse'
 import { Profile } from 'src/types/users'
 
 import { DEFAULT_PROFILE } from './constants'
-import HeaderBrowse from './HeaderBrowse'
 import { SelectProfile } from './SelectProfile'
 
 const BrowseContainer = () => {
-    // TODO: slides is series and film data as initialisation here
-    // const slides = selectionFilter({ series, films });
-
-    const slides = []
-
     const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE)
     const [loading, setLoading] = useState<boolean>(true)
     const [searchTerm, setSearchTerm] = useState<string>('')
@@ -44,7 +39,7 @@ const BrowseContainer = () => {
         // } else {
         //     setSlideRows(slides?.[category])
         // }
-    }, [searchTerm, slides, slideRows])
+    }, [searchTerm, slideRows])
 
     if (!profile.displayName) {
         return <SelectProfile profile={profile} onSetProfile={setProfile} />

@@ -1,21 +1,19 @@
-import 'server-only'
+// import 'server-only'
 
-import { ResponseFilms } from 'src/types/films'
+import { ResponseFilms, ResponseVideo } from 'src/types'
 
 import { BaseServices } from './BaseServices'
 
-// Search API: `https://api.themoviedb.org/3/search/multi?api_key=""&query=""`
-
 class FilmServices extends BaseServices {
-    // public async getFilms() {
-    //     return this.getRequest({
-    //         api: `movie/changes?page=1`
-    //     })
-    // }
-
     public async getPopularFilms(): Promise<ResponseFilms> {
         return this.getRequest({
-            api: `movie/popular?page=1`
+            api: `movie/popular?page=1&append_to_response=videos`
+        })
+    }
+
+    public async getFilmKey(filmId: number): Promise<ResponseVideo> {
+        return this.getRequest({
+            api: `movie/${filmId}/videos`
         })
     }
 }

@@ -21,12 +21,8 @@ const Inner = styled.div`
     position: relative;
     width: 100%;
     max-width: 900px;
+    height: 50%;
     margin: auto;
-
-    video {
-        height: 100%;
-        width: 100%;
-    }
 `
 
 const Close = styled.button`
@@ -107,9 +103,13 @@ export const PlayerVideo = ({ src }) => {
                   data-testid='player'
               >
                   <Inner>
-                      <video id='netflix-player' controls>
-                          <source src={src} type='video/mp4' />
-                      </video>
+                      <iframe
+                          style={{ width: '100%', height: '100%' }}
+                          id='netflix-player'
+                          src={src}
+                          allow='autoplay; fullscreen;encrypted-media;'
+                      />
+
                       <Close />
                   </Inner>
               </Overlay>,
@@ -118,11 +118,17 @@ export const PlayerVideo = ({ src }) => {
         : null
 }
 
-export const PlayerButton = ({ ...restProps }) => {
+export const PlayerButton = ({ onClick, ...restProps }) => {
     const { showPlayer, setShowPlayer } = useContext(PlayerContext)
 
     return (
-        <Button onClick={() => setShowPlayer(!showPlayer)} {...restProps}>
+        <Button
+            onClick={() => {
+                onClick()
+                setShowPlayer(!showPlayer)
+            }}
+            {...restProps}
+        >
             Play
         </Button>
     )
