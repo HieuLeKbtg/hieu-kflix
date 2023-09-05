@@ -1,20 +1,17 @@
 import MainFooter from 'src/containers/footer'
 import HeaderBrowse from 'src/containers/HeaderBrowse'
 import SlideRows from 'src/containers/SlideRows'
-import { configServices } from 'src/services/ConfigurationServices'
-import { filmServices } from 'src/services/FilmServices'
-import { genreServices } from 'src/services/GenreServices'
-import { ResponseFilms, ResponseGenres } from 'src/types'
-import { ResponseConfiguration } from 'src/types/configs'
+import { configServices, filmServices, genreServices } from 'src/services'
+import { ResponseConfiguration, ResponseFilms, ResponseGenres } from 'src/types'
 
 const Films = async () => {
     const responseFilmsResult: ResponseFilms =
         await filmServices.getPopularFilms()
-
-    const configResult: ResponseConfiguration = await configServices.getDetail()
     const genreResult: ResponseGenres = await genreServices.getGenreMoveList()
 
-    const filmList = responseFilmsResult.results.map((film) => {
+    const configResult: ResponseConfiguration = await configServices.getDetail()
+
+    const filmList = responseFilmsResult?.results?.map((film) => {
         return {
             id: film.id,
             title: film.title,
@@ -32,7 +29,7 @@ const Films = async () => {
             <HeaderBrowse />
 
             <SlideRows
-                category='series'
+                category='films'
                 imageConfigs={configResult.images}
                 data={filmList}
             />

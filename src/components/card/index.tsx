@@ -116,7 +116,7 @@ export const CardFeature = styled.div<{ src: string }>`
     display: flex;
     flex-direction: row;
     background: url(${({ src }) => src});
-    background-size: 100% 100%;
+    background-size: cover;
     position: relative;
     padding: 24px;
     background-position-x: right;
@@ -234,11 +234,6 @@ export const MainCardFeature = (props) => {
                     flexDirection='row'
                     alignItems='center'
                 >
-                    {/* <CardMaturity rating={itemFeature.maturity}>
-                        {itemFeature.maturity < 12
-                            ? 'PG'
-                            : itemFeature.maturity}
-                    </CardMaturity> */}
                     <CardFeatureText fontWeight='bold'>
                         {genresTextNode}
                     </CardFeatureText>

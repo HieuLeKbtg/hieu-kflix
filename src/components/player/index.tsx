@@ -119,13 +119,13 @@ export const PlayerVideo = ({ src }) => {
 }
 
 export const PlayerButton = ({ onClick, ...restProps }) => {
-    const { showPlayer, setShowPlayer } = useContext(PlayerContext)
+    const { setShowPlayer } = useContext(PlayerContext)
 
     return (
         <Button
             onClick={() => {
                 onClick()
-                setShowPlayer(!showPlayer)
+                setShowPlayer(true)
             }}
             {...restProps}
         >

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Loading, ReleaseBody } from 'src/components'
 import MainFooter from 'src/containers/footer'
 import HeaderBrowse from 'src/containers/HeaderBrowse'
-import { Profile } from 'src/types/users'
+import { Profile } from 'src/types'
 
 import { DEFAULT_PROFILE } from './constants'
 import { SelectProfile } from './SelectProfile'

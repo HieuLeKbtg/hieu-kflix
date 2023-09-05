@@ -15,11 +15,12 @@ import {
     PlayerButton,
     PlayerVideo
 } from 'src/components'
+import { seriesServices } from 'src/services'
 import { filmServices } from 'src/services/FilmServices'
 import { Genres, ImageConfigs } from 'src/types'
 
 type SlideRowsProps = {
-    category: string
+    category: 'series' | 'films'
     imageConfigs: ImageConfigs
     data: {
         id: number
@@ -36,9 +37,14 @@ const SlideRows = (props: SlideRowsProps) => {
     const [videoKey, setVideoKey] = useState<string>('')
 
     const getVideokey = async (id: number) => {
-        const videoDetail = await filmServices.getFilmKey(id)
+        const videoDetail =
+            category === 'films'
+                ? await filmServices.getFilmKey(id)
+                : await seriesServices.getSeriesKey(id)
         if (videoDetail?.results?.length) {
             setVideoKey(videoDetail.results[0]?.key)
+        } else {
+            setVideoKey('')
         }
     }
 
@@ -48,8 +54,8 @@ const SlideRows = (props: SlideRowsProps) => {
             flexWrap='wrap'
             justifyContent='space-evenly'
         >
-            {data.map((slideItem) => (
-                <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            {data?.map((slideItem) => (
+                <Card key={slideItem.id}>
                     <CardTitle>{slideItem.title}</CardTitle>
                     <CardEntities>
                         <MainCardItem key={slideItem.id} item={slideItem}>
@@ -62,7 +68,6 @@ const SlideRows = (props: SlideRowsProps) => {
                         </MainCardItem>
                     </CardEntities>
                     <MainCardFeature
-                        category={category}
                         genres={slideItem.genres}
                         url={`${imageConfigs.secure_base_url}/original/${slideItem.poster_path}`}
                     >

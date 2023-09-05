@@ -5,7 +5,6 @@ import 'normalize.css'
 import { redirect, usePathname } from 'next/navigation'
 import React, { ReactNode } from 'react'
 
-// import { useAuthListener } from 'src/hooks'
 import { appRoutes } from './routes'
 
 type GlobalLayoutProps = {
@@ -15,7 +14,8 @@ type GlobalLayoutProps = {
 const GlobalLayout = (props: GlobalLayoutProps) => {
     const { children } = props
     const pathname = usePathname()
-    // const { user } = useAuthListener()
+
+    // TODO: add user here
     const user = {}
 
     const ALL_ROUTES: string[] = [

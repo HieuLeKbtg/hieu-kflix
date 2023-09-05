@@ -1,5 +1,3 @@
-// import 'server-only'
-
 import { configEnv } from 'src/utils/configEnv'
 
 type RequestProps = {

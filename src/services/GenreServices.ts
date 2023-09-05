@@ -1,5 +1,3 @@
-import 'server-only'
-
 import { ResponseGenres } from 'src/types'
 
 import { BaseServices } from './BaseServices'
@@ -11,7 +9,7 @@ class GenreServices extends BaseServices {
         })
     }
 
-    public async getGenreTvList(genreIds?: number[]): Promise<ResponseGenres> {
+    public async getGenreTvList(): Promise<ResponseGenres> {
         return this.getRequest({
             api: `genre/tv/list`
         })

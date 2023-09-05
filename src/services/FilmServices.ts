@@ -1,5 +1,3 @@
-// import 'server-only'
-
 import { ResponseFilms, ResponseVideo } from 'src/types'
 
 import { BaseServices } from './BaseServices'

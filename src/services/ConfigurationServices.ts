@@ -1,6 +1,4 @@
-import 'server-only'
-
-import { ResponseConfiguration } from 'src/types/configs'
+import { ResponseConfiguration } from 'src/types'
 
 import { BaseServices } from './BaseServices'
 
