@@ -31,6 +31,7 @@ const Series = async () => {
     return (
         <>
             <HeaderBrowse />
+
             <SlideRows
                 category='series'
                 imageConfigs={configResult.images}

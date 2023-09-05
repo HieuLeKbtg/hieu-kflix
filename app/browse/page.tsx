@@ -12,7 +12,7 @@ import { SelectProfile } from './SelectProfile'
 const BrowseContainer = () => {
     const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE)
     const [loading, setLoading] = useState<boolean>(true)
-    const [searchTerm, setSearchTerm] = useState<string>('')
+    const [search, setSearch] = useState<string>('')
     const [slideRows, setSlideRows] = useState([])
 
     // TODO: get user here
@@ -23,24 +23,8 @@ const BrowseContainer = () => {
         }, 3000)
     }, [])
 
-    useEffect(() => {
-        // const fuse = new Fuse(slideRows, {
-        //     keys: ['data.description', 'data.title', 'data.genre']
-        // })
-        // const results = fuse.search(searchTerm).map(({ item }) => item)
-        // if (
-        //     slideRows.length > 0 &&
-        //     searchTerm.length > 3 &&
-        //     results.length > 0
-        // ) {
-        //     setSlideRows(results)
-        // } else {
-        //     setSlideRows(slides?.[category])
-        // }
-    }, [searchTerm, slideRows])
-
     if (!profile.displayName) {
-        return <SelectProfile profile={profile} onSetProfile={setProfile} />
+        return <SelectProfile onSetProfile={setProfile} />
     }
 
     return (

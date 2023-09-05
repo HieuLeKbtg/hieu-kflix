@@ -32,7 +32,7 @@ export default function SignUp() {
 
     const isInvalid = firstName === '' || password === '' || emailAddress === ''
 
-    const handleSignup = (e) => {
+    const handleSignup = () => {
         if (isInvalid) return
 
         const isUserExist: boolean = !!(

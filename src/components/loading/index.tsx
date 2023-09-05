@@ -22,7 +22,7 @@ const Spinner = styled.div`
     background-color: black;
     z-index: 999;
 
-    :after {
+    &:after {
         content: '';
         position: absolute;
         top: 50%;

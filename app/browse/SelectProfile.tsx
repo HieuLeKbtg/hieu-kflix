@@ -13,14 +13,14 @@ import {
     ProfilesName,
     ProfilesTitle
 } from '../../src/components'
+import { DEFAULT_PROFILE_LIST } from './constants'
 
 type SelectProfileProps = {
-    profile: Profile
     onSetProfile: Dispatch<SetStateAction<Profile>>
 }
 
 export function SelectProfile(props: SelectProfileProps) {
-    const { profile, onSetProfile } = props
+    const { onSetProfile } = props
 
     return (
         <>
@@ -36,20 +36,25 @@ export function SelectProfile(props: SelectProfileProps) {
 
             <ProfilesContainer>
                 <ProfilesTitle>Who's watching?</ProfilesTitle>
-                <ProfilesList>
-                    <ProfilesItem
-                        onClick={() =>
-                            onSetProfile({
-                                displayName: profile.displayName,
-                                photoURL: profile.photoURL
-                            })
-                        }
-                        data-testid='user-profile'
-                    >
-                        <MainProfilesPicture src={profile.photoURL} />
-                        <ProfilesName>{profile.displayName}</ProfilesName>
-                    </ProfilesItem>
-                </ProfilesList>
+                <div style={{ display: 'flex', gap: '15px' }}>
+                    {DEFAULT_PROFILE_LIST.map((profile, index) => {
+                        return (
+                            <ProfilesList key={index}>
+                                <ProfilesItem
+                                    onClick={() => onSetProfile(profile)}
+                                    data-testid='user-profile'
+                                >
+                                    <MainProfilesPicture
+                                        src={profile.photoURL}
+                                    />
+                                    <ProfilesName>
+                                        {profile.displayName}
+                                    </ProfilesName>
+                                </ProfilesItem>
+                            </ProfilesList>
+                        )
+                    })}
+                </div>
             </ProfilesContainer>
         </>
     )

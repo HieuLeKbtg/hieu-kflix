@@ -75,7 +75,7 @@ export const MainProfilesPicture = ({
 }) => {
     return (
         <ProfilesPicture
-            src={src ? `/images/users/${src}.png` : '/images/misc/loading.gif'}
+            src={src || '/images/misc/loading.gif'}
             {...restProps}
         />
     )

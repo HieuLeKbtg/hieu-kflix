@@ -1,7 +1,7 @@
 'use client'
 
 import { appRoutes } from 'app/routes'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import {
     Header,
@@ -22,7 +22,6 @@ import localStorageHelper from 'src/helpers/LocalStorageHelper'
 import { User } from 'src/types'
 
 const HeaderBrowse = () => {
-    const router = useRouter()
     const pathname = usePathname()
 
     const user: User = localStorageHelper.getUserInfo()
