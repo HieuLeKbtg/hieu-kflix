@@ -121,7 +121,7 @@ export const SearchIcon = styled.button`
 export const HeaderButtonLink = styled(Link)`
     display: block;
     background-color: #e50914;
-    width: 84px;
+    width: max-content;
     height: fit-content;
     color: white;
     border: 0;

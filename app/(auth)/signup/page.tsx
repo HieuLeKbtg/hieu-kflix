@@ -2,7 +2,7 @@
 
 import { appRoutes } from 'app/routes'
 import { useRouter } from 'next/navigation'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {
     FormBase,
     FormContainer,
@@ -16,41 +16,39 @@ import {
 } from 'src/components'
 import MainFooter from 'src/containers/footer'
 import HeaderContainer from 'src/containers/header'
-import { FirebaseContext } from 'src/context'
+import localStorageHelper from 'src/helpers/LocalStorageHelper'
+import { User } from 'src/types'
+
+import { EMAIL_EXISTED } from '../constants'
 
 export default function SignUp() {
     const router = useRouter()
-    const { firebase } = useContext(FirebaseContext)
+    const userList: User[] = localStorageHelper.getUserList()
 
-    const [firstName, setFirstName] = useState('')
-    const [emailAddress, setEmailAddress] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [emailAddress, setEmailAddress] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [error, setError] = useState<string>('')
 
     const isInvalid = firstName === '' || password === '' || emailAddress === ''
 
-    const handleSignup = (event) => {
-        event.preventDefault()
+    const handleSignup = (e) => {
+        if (isInvalid) return
 
-        return firebase
-            .auth()
-            .createUserWithEmailAndPassword(emailAddress, password)
-            .then((result) =>
-                result.user
-                    .updateProfile({
-                        displayName: firstName,
-                        photoURL: Math.floor(Math.random() * 5) + 1
-                    })
-                    .then(() => {
-                        router.push(appRoutes.HOME)
-                    })
-            )
-            .catch((error) => {
-                setFirstName('')
-                setEmailAddress('')
-                setPassword('')
-                setError(error.message)
-            })
+        const isUserExist: boolean = !!(
+            userList &&
+            userList.find((user: User) => user.emailAddress === emailAddress)
+        )
+        if (isUserExist) {
+            setError(EMAIL_EXISTED)
+            return
+        }
+
+        localStorageHelper.setUserList([
+            ...userList,
+            { firstName, emailAddress, password }
+        ])
+        return router.push(appRoutes.SIGN_IN)
     }
 
     return (
@@ -60,7 +58,7 @@ export default function SignUp() {
                     <FormTitle>Sign Up</FormTitle>
                     {error && <FormError>{error}</FormError>}
 
-                    <FormBase onSubmit={handleSignup} method='POST'>
+                    <FormBase>
                         <FormInput
                             placeholder='First name'
                             value={firstName}
@@ -86,14 +84,14 @@ export default function SignUp() {
                                 setPassword((target as HTMLInputElement).value)
                             }
                         />
-                        <FormSubmit
-                            disabled={isInvalid}
-                            type='submit'
-                            data-testid='sign-up'
-                        >
-                            Sign Up
-                        </FormSubmit>
                     </FormBase>
+                    <FormSubmit
+                        disabled={isInvalid}
+                        data-testid='sign-up'
+                        onClick={handleSignup}
+                    >
+                        Sign Up
+                    </FormSubmit>
 
                     <FormText>
                         Already a user?{' '}

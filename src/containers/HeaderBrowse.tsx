@@ -1,7 +1,7 @@
 'use client'
 
 import { appRoutes } from 'app/routes'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import {
     Header,
@@ -18,13 +18,15 @@ import {
     HeaderSearch,
     HeaderText
 } from 'src/components'
+import localStorageHelper from 'src/helpers/LocalStorageHelper'
+import { User } from 'src/types'
 
 const HeaderBrowse = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('')
+    const router = useRouter()
     const pathname = usePathname()
 
-    // TODO: get user here
-    const user = { photoURL: '2', displayName: 'Hieu Le' }
+    const user: User = localStorageHelper.getUserInfo()
+    const [searchTerm, setSearchTerm] = useState<string>('')
 
     return (
         <Header src='joker1'>
@@ -52,20 +54,20 @@ const HeaderBrowse = () => {
                             setSearchTerm={setSearchTerm}
                         />
                         <HeaderProfile>
-                            <HeaderPicture src={user.photoURL} />
+                            <HeaderPicture src='2' />
                             <HeaderDropdown>
                                 <HeaderGroup>
-                                    <HeaderPicture src={user.photoURL} />
+                                    <HeaderPicture src='2' />
                                     <HeaderLink href='#'>
-                                        {user.displayName}
+                                        {user.firstName}
                                     </HeaderLink>
                                 </HeaderGroup>
                                 <HeaderGroup>
                                     <HeaderLink
-                                        href='#'
-                                        // onClick={() => {
-                                        //     // firebase.auth().signOut()
-                                        // }}
+                                        href={appRoutes.HOME}
+                                        onClick={() =>
+                                            localStorageHelper.removeUserInfo()
+                                        }
                                     >
                                         Sign out
                                     </HeaderLink>

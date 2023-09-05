@@ -2,7 +2,7 @@
 
 import { appRoutes } from 'app/routes'
 import { useRouter } from 'next/navigation'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {
     FormBase,
     FormContainer,
@@ -16,32 +16,40 @@ import {
 } from 'src/components'
 import MainFooter from 'src/containers/footer'
 import HeaderContainer from 'src/containers/header'
-import { FirebaseContext } from 'src/context'
+import localStorageHelper from 'src/helpers/LocalStorageHelper'
+import { User } from 'src/types'
+
+import { INCORRECT_AUTH } from '../constants'
 
 export default function SignIn() {
+    const userList: User[] = localStorageHelper.getUserList()
     const router = useRouter()
-    const { firebase } = useContext(FirebaseContext)
-
     const [emailAddress, setEmailAddress] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [error, setError] = useState<string>('')
 
     const isInvalid = password === '' || emailAddress === ''
 
-    const handleSignin = (event) => {
-        event.preventDefault()
+    const handleSignin = () => {
+        if (isInvalid) return
+        const currentUser: User = userList.find(
+            (user: User) => user.emailAddress === emailAddress
+        )
+        if (!currentUser) {
+            setError(INCORRECT_AUTH)
+            return
+        }
 
-        return firebase
-            .auth()
-            .signInWithEmailAndPassword(emailAddress, password)
-            .then(() => {
-                router.push(appRoutes.BROWSE)
-            })
-            .catch((error) => {
-                setEmailAddress('')
-                setPassword('')
-                setError(error.message)
-            })
+        if (
+            emailAddress !== currentUser.emailAddress ||
+            password !== currentUser.password
+        ) {
+            setError(INCORRECT_AUTH)
+            return
+        }
+
+        localStorageHelper.setUserInfo(currentUser)
+        router.push(appRoutes.HOME)
     }
 
     return (
@@ -53,7 +61,7 @@ export default function SignIn() {
                         <FormError data-testid='error'>{error}</FormError>
                     )}
 
-                    <FormBase onSubmit={handleSignin} method='POST'>
+                    <FormBase>
                         <FormInput
                             placeholder='Email address'
                             value={emailAddress}
@@ -71,15 +79,21 @@ export default function SignIn() {
                             onChange={({ target }) =>
                                 setPassword((target as HTMLInputElement).value)
                             }
+                            onKeyPress={(event) => {
+                                if (event.key === 'Enter') {
+                                    handleSignin()
+                                }
+                            }}
                         />
-                        <FormSubmit
-                            disabled={isInvalid}
-                            type='submit'
-                            data-testid='sign-in'
-                        >
-                            Sign In
-                        </FormSubmit>
                     </FormBase>
+
+                    <FormSubmit
+                        disabled={isInvalid}
+                        data-testid='sign-in'
+                        onClick={handleSignin}
+                    >
+                        Sign In
+                    </FormSubmit>
 
                     <FormText>
                         New to Netflix?{' '}

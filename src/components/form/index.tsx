@@ -25,7 +25,7 @@ export const FormError = styled.div`
     padding: 15px 20px;
 `
 
-export const FormBase = styled.form`
+export const FormBase = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 450px;

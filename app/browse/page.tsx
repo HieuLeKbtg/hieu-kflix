@@ -16,8 +16,6 @@ const BrowseContainer = () => {
     const [slideRows, setSlideRows] = useState([])
 
     // TODO: get user here
-    // const { firebase } = useContext(FirebaseContext)
-    // const user = firebase.auth().currentUser || {}
 
     useEffect(() => {
         setTimeout(() => {

@@ -15,7 +15,7 @@ export abstract class BaseServices {
         Authorization: `Bearer ${this.apiKey}`
     }
 
-    protected async getRequest(params: RequestProps) {
+    protected async getRequest<T>(params: RequestProps): Promise<T> | null {
         const { api, body, headers, callback } = params
 
         const result = await fetch(`${this.baseApi}/${api}`, {
@@ -33,7 +33,7 @@ export abstract class BaseServices {
         return result
     }
 
-    protected async postRequest(params: RequestProps) {
+    protected async postRequest<T>(params: RequestProps): Promise<T> | null {
         const { api, body, headers, callback } = params
         const result = await fetch(`${this.baseApi}/${api}`, {
             method: 'POST',
