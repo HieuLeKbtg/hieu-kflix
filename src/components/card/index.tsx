@@ -1,5 +1,9 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react'
+import React, {
+    createContext,
+    useContext,
+    useState
+} from 'react'
 import styled from 'styled-components/macro'
 
 export const CardTitle = styled.p`
@@ -14,6 +18,7 @@ export const CardContainer = styled.div`
     margin-bottom: 50px;
     margin: 0 36px 24px;
     flex-basis: calc(25% - 72px);
+    position: relative;
 
     > ${CardTitle} {
         @media (max-width: 1000px) {
@@ -60,6 +65,10 @@ export const CardText = styled.p`
     user-select: none;
     display: none;
     line-height: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
 `
 
 export const CardEntities = styled.div``
@@ -70,12 +79,13 @@ export const CardMeta = styled.div`
     bottom: 0;
     padding: 10px;
     background-color: #0000008f;
+    width: 100%;
 `
 
 export const CardImage = styled.img`
     border: 0;
     width: 100%;
-    height: auto;
+    height: 212px;
     cursor: pointer;
     padding: 0;
     margin: 0;
@@ -117,8 +127,13 @@ export const CardFeature = styled.div<{ src: string }>`
     flex-direction: row;
     background: url(${({ src }) => src});
     background-size: cover;
-    position: relative;
-    padding: 24px;
+    position: fixed;
+    padding: 16px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    height: 300px;
     background-position-x: right;
     background-repeat: no-repeat;
     background-color: black;
