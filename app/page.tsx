@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
 import React from 'react'
 import {
     FeatureContainer,
@@ -11,13 +13,23 @@ import {
 } from 'src/components'
 import FaqsContainer from 'src/containers/faqs'
 import MainFooter from 'src/containers/footer'
-import HeaderContainer from 'src/containers/header'
 import MainJumbotron from 'src/containers/jumbotron'
 
-export default function Homepage() {
+import PublicHeader from '@/containers/header/publicHeader'
+
+import { authOptions } from './api/auth/[...nextauth]/route'
+import { appRoutes } from './routes'
+
+export default async function Homepage() {
+    const session = await getServerSession(authOptions)
+
+    if (session?.user) {
+        redirect(appRoutes.BROWSE)
+    }
+
     return (
         <>
-            <HeaderContainer>
+            <PublicHeader>
                 <FeatureContainer>
                     <FeatureTitle>
                         Unlimited films, TV programmes and more
@@ -35,7 +47,7 @@ export default function Homepage() {
                         </OptFormText>
                     </OptFormContainer>
                 </FeatureContainer>
-            </HeaderContainer>
+            </PublicHeader>
 
             <MainJumbotron />
             <FaqsContainer />

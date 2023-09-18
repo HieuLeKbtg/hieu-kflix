@@ -1,6 +1,5 @@
 export * from './faqs'
 export * from './footer'
 export * from './header'
-export * from './HeaderBrowse'
 export * from './jumbotron'
 export * from './SlideRows'

@@ -150,7 +150,6 @@ export const HeaderDropdown = styled.div`
     position: absolute;
     background-color: black;
     padding: 10px;
-    width: 100px;
     top: 32px;
     right: 10px;
 

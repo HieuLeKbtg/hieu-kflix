@@ -1,3 +1,4 @@
+import { appRoutes } from 'app/routes'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -11,7 +12,7 @@ type Credential = {
 export const authOptions = {
     // Configure one or more authentication providers
     pages: {
-        signIn: '/signin'
+        signIn: appRoutes.SIGN_IN
     },
     providers: [
         CredentialsProvider({

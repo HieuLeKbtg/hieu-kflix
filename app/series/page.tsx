@@ -1,5 +1,4 @@
 import MainFooter from 'src/containers/footer'
-import HeaderBrowse from 'src/containers/HeaderBrowse'
 import SlideRows from 'src/containers/SlideRows'
 import { configServices, genreServices, seriesServices } from 'src/services'
 import {
@@ -7,6 +6,8 @@ import {
     ResponseGenres,
     ResponseSeries
 } from 'src/types'
+
+import AuthHeader from '@/containers/header/authHeader'
 
 const Series = async () => {
     const responseSeriesResult: ResponseSeries =
@@ -30,7 +31,7 @@ const Series = async () => {
 
     return (
         <>
-            <HeaderBrowse />
+            <AuthHeader />
 
             <SlideRows
                 category='series'

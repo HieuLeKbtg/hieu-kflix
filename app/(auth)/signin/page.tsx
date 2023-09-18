@@ -1,7 +1,7 @@
 'use client'
 
 import { appRoutes } from 'app/routes'
-import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 import {
     FormBase,
@@ -15,11 +15,10 @@ import {
     FormTitle
 } from 'src/components'
 import MainFooter from 'src/containers/footer'
-import HeaderContainer from 'src/containers/header'
 
+import PublicHeader from '@/containers/header/publicHeader'
 
 export default function SignIn() {
-    const router = useRouter()
     const [emailAddress, setEmailAddress] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [error, setError] = useState<string>('')
@@ -28,29 +27,27 @@ export default function SignIn() {
 
     const handleSignin = () => {
         if (isInvalid) return
-        // const currentUser: User = userList.find(
-        //     (user: User) => user.emailAddress === emailAddress
-        // )
-        // if (!currentUser) {
-        //     setError(INCORRECT_AUTH)
-        //     return
-        // }
 
-        // if (
-        //     emailAddress !== currentUser.emailAddress ||
-        //     password !== currentUser.password
-        // ) {
-        //     setError(INCORRECT_AUTH)
-        //     return
-        // }
-
-        // localStorageHelper.setUserInfo(currentUser)
-        router.push(appRoutes.HOME)
+        signIn('credentials', {
+            email: emailAddress,
+            password,
+            redirect: true,
+            callbackUrl: appRoutes.BROWSE
+        }).catch((err) => {
+            setError(err.message)
+        })
     }
+
+    // TODO: check is sign in and redirect to browse
+    //     const session = await getServerSession(authOptions)
+
+    // if (session?.user) {
+    //     redirect(appRoutes.BROWSE)
+    // }
 
     return (
         <>
-            <HeaderContainer>
+            <PublicHeader>
                 <FormContainer>
                     <FormTitle>Sign In</FormTitle>
                     {error && (
@@ -100,7 +97,7 @@ export default function SignIn() {
                         you're not a bot Learn more
                     </FormTextSmall>
                 </FormContainer>
-            </HeaderContainer>
+            </PublicHeader>
             <MainFooter />
         </>
     )

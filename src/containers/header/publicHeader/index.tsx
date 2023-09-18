@@ -10,9 +10,12 @@ import {
     HeaderLogo
 } from 'src/components/header'
 
-export default function HeaderContainer({ children }: { children: ReactNode }) {
+const PublicHeader = ({ children }: { children: ReactNode }) => {
     const pathname = usePathname()
-    const isOnSigninPage = pathname === appRoutes.SIGN_IN
+    const isOnAuthPages = !![appRoutes.SIGN_IN, appRoutes.SIGN_UP].includes(
+        pathname as appRoutes
+    )
+
     return (
         <Header>
             <>
@@ -22,18 +25,16 @@ export default function HeaderContainer({ children }: { children: ReactNode }) {
                         src='/images/icons/logo.svg'
                         alt='Netflix'
                     />
-                    <HeaderButtonLink
-                        href={
-                            isOnSigninPage
-                                ? appRoutes.SIGN_UP
-                                : appRoutes.SIGN_IN
-                        }
-                    >
-                        {isOnSigninPage ? 'Sign Up' : 'Sign In'}
-                    </HeaderButtonLink>
+                    {!isOnAuthPages && (
+                        <HeaderButtonLink href={appRoutes.SIGN_IN}>
+                            Sign In
+                        </HeaderButtonLink>
+                    )}
                 </HeaderFrame>
                 {children}
             </>
         </Header>
     )
 }
+
+export default PublicHeader

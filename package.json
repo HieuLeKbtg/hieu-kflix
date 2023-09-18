@@ -12,7 +12,7 @@
         "@babel/core": "^7.22.11",
         "@builder.io/partytown": "^0.8.0",
         "@types/node": "20.5.7",
-        "@types/react": "18.2.21",
+        "@types/react": "^18.2.21",
         "@types/react-dom": "18.2.7",
         "babel-plugin-macros": "^3.1.0",
         "babel-plugin-styled-components": "^2.1.4",

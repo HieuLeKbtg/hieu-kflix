@@ -1,8 +1,9 @@
 import MainFooter from 'src/containers/footer'
-import HeaderBrowse from 'src/containers/HeaderBrowse'
 import SlideRows from 'src/containers/SlideRows'
 import { configServices, filmServices, genreServices } from 'src/services'
 import { ResponseConfiguration, ResponseFilms, ResponseGenres } from 'src/types'
+
+import AuthHeader from '@/containers/header/authHeader'
 
 const Films = async () => {
     const responseFilmsResult: ResponseFilms =
@@ -26,7 +27,7 @@ const Films = async () => {
 
     return (
         <>
-            <HeaderBrowse />
+            <AuthHeader />
 
             <SlideRows
                 category='films'

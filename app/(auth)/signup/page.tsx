@@ -1,8 +1,10 @@
 'use client'
 
 import { appRoutes } from 'app/routes'
-import { useRouter } from 'next/navigation'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
+import { auth } from 'src'
 import {
     FormBase,
     FormContainer,
@@ -15,13 +17,10 @@ import {
     FormTitle
 } from 'src/components'
 import MainFooter from 'src/containers/footer'
-import HeaderContainer from 'src/containers/header'
 
+import PublicHeader from '@/containers/header/publicHeader'
 
 export default function SignUp() {
-    const router = useRouter()
-    // const userList: User[] = localStorageHelper.getUserList()
-
     const [firstName, setFirstName] = useState<string>('')
     const [emailAddress, setEmailAddress] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -29,28 +28,32 @@ export default function SignUp() {
 
     const isInvalid = firstName === '' || password === '' || emailAddress === ''
 
-    const handleSignup = () => {
+    const handleSignup = async () => {
         if (isInvalid) return
 
-        // const isUserExist: boolean = !!(
-        //     userList &&
-        //     userList.find((user: User) => user.emailAddress === emailAddress)
-        // )
-        // if (isUserExist) {
-        //     setError(EMAIL_EXISTED)
-        //     return
-        // }
-
-        // localStorageHelper.setUserList([
-        //     ...userList,
-        //     { firstName, emailAddress, password }
-        // ])
-        return router.push(appRoutes.SIGN_IN)
+        try {
+            const user = await createUserWithEmailAndPassword(
+                auth,
+                emailAddress,
+                password
+            )
+            await updateProfile(user.user, { displayName: firstName })
+            signIn('credentials', {
+                email: emailAddress,
+                password,
+                redirect: true,
+                callbackUrl: appRoutes.HOME
+            })
+        } catch (error) {
+            setError((error as Error).message)
+        }
     }
+
+    // TODO: check is sign in and redirect to browse
 
     return (
         <>
-            <HeaderContainer>
+            <PublicHeader>
                 <FormContainer>
                     <FormTitle>Sign Up</FormTitle>
                     {error && <FormError>{error}</FormError>}
@@ -99,7 +102,7 @@ export default function SignUp() {
                         you're not a bot Learn more
                     </FormTextSmall>
                 </FormContainer>
-            </HeaderContainer>
+            </PublicHeader>
             <MainFooter />
         </>
     )
