@@ -1,2 +1,2 @@
-export * from './firebase.prod'
-export * from './seed'
+export * from './firebase'
+export * from './styledComponentRegistry'

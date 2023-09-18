@@ -1,13 +1,12 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Loading, ReleaseBody } from 'src/components'
-import MainFooter from 'src/containers/footer'
-import HeaderBrowse from 'src/containers/HeaderBrowse'
-import { Profile } from 'src/types'
+import { Profile } from 'src'
+
+import MainFooter from '@/containers/footer'
+import HeaderBrowse from '@/containers/HeaderBrowse'
 
 import { DEFAULT_PROFILE } from './constants'
-import { SelectProfile } from './SelectProfile'
 
 const BrowseContainer = () => {
     const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE)
@@ -23,13 +22,13 @@ const BrowseContainer = () => {
         }, 3000)
     }, [])
 
-    if (!profile.displayName) {
-        return <SelectProfile onSetProfile={setProfile} />
-    }
+    // if (!profile.displayName) {
+    //     return <SelectProfile onSetProfile={setProfile} />
+    // }
 
     return (
         <>
-            {loading ? <Loading src={profile.photoURL} /> : <ReleaseBody />}
+            {/* {loading ? <Loading src={profile.photoURL} /> : <ReleaseBody />} */}
 
             <HeaderBrowse />
 

@@ -16,14 +16,11 @@ import {
 } from 'src/components'
 import MainFooter from 'src/containers/footer'
 import HeaderContainer from 'src/containers/header'
-import localStorageHelper from 'src/helpers/LocalStorageHelper'
-import { User } from 'src/types'
 
-import { EMAIL_EXISTED } from '../constants'
 
 export default function SignUp() {
     const router = useRouter()
-    const userList: User[] = localStorageHelper.getUserList()
+    // const userList: User[] = localStorageHelper.getUserList()
 
     const [firstName, setFirstName] = useState<string>('')
     const [emailAddress, setEmailAddress] = useState<string>('')
@@ -35,19 +32,19 @@ export default function SignUp() {
     const handleSignup = () => {
         if (isInvalid) return
 
-        const isUserExist: boolean = !!(
-            userList &&
-            userList.find((user: User) => user.emailAddress === emailAddress)
-        )
-        if (isUserExist) {
-            setError(EMAIL_EXISTED)
-            return
-        }
+        // const isUserExist: boolean = !!(
+        //     userList &&
+        //     userList.find((user: User) => user.emailAddress === emailAddress)
+        // )
+        // if (isUserExist) {
+        //     setError(EMAIL_EXISTED)
+        //     return
+        // }
 
-        localStorageHelper.setUserList([
-            ...userList,
-            { firstName, emailAddress, password }
-        ])
+        // localStorageHelper.setUserList([
+        //     ...userList,
+        //     { firstName, emailAddress, password }
+        // ])
         return router.push(appRoutes.SIGN_IN)
     }
 

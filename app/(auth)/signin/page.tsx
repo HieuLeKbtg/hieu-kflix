@@ -16,13 +16,9 @@ import {
 } from 'src/components'
 import MainFooter from 'src/containers/footer'
 import HeaderContainer from 'src/containers/header'
-import localStorageHelper from 'src/helpers/LocalStorageHelper'
-import { User } from 'src/types'
 
-import { INCORRECT_AUTH } from '../constants'
 
 export default function SignIn() {
-    const userList: User[] = localStorageHelper.getUserList()
     const router = useRouter()
     const [emailAddress, setEmailAddress] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -32,23 +28,23 @@ export default function SignIn() {
 
     const handleSignin = () => {
         if (isInvalid) return
-        const currentUser: User = userList.find(
-            (user: User) => user.emailAddress === emailAddress
-        )
-        if (!currentUser) {
-            setError(INCORRECT_AUTH)
-            return
-        }
+        // const currentUser: User = userList.find(
+        //     (user: User) => user.emailAddress === emailAddress
+        // )
+        // if (!currentUser) {
+        //     setError(INCORRECT_AUTH)
+        //     return
+        // }
 
-        if (
-            emailAddress !== currentUser.emailAddress ||
-            password !== currentUser.password
-        ) {
-            setError(INCORRECT_AUTH)
-            return
-        }
+        // if (
+        //     emailAddress !== currentUser.emailAddress ||
+        //     password !== currentUser.password
+        // ) {
+        //     setError(INCORRECT_AUTH)
+        //     return
+        // }
 
-        localStorageHelper.setUserInfo(currentUser)
+        // localStorageHelper.setUserInfo(currentUser)
         router.push(appRoutes.HOME)
     }
 

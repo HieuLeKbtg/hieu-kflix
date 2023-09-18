@@ -4,8 +4,9 @@ import 'normalize.css'
 
 import isPropValid from '@emotion/is-prop-valid'
 import { ReactNode } from 'react'
-import StyledComponentsRegistry from 'src/lib/styledComponentRegistry'
 import { StyleSheetManager } from 'styled-components'
+
+import StyledComponentsRegistry from '@/lib/styledComponentRegistry'
 
 import GlobalStyles from './globalStyles'
 

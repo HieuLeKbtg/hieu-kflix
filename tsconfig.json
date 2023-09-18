@@ -2,15 +2,16 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/components/*": ["@/src/components/*"],
-            "@/constants/*": ["@/src/constants/*"],
-            "@/containers/*": ["@/src/containers/*"],
-            "@/context/*": ["@/src/context/*"],
-            "@/fixtures/*": ["@/src/fixtures/*"],
-            "@/helpers/*": ["@/src/helpers/*"],
-            "@/hooks/*": ["@/src/hooks/*"],
-            "@/lib/*": ["@/src/lib/*"],
-            "@/utils/*": ["@/src/utils/*"]
+            "@/components/*": ["src/components/*"],
+            "@/containers/*": ["src/containers/*"],
+            "@/fixtures/*": ["src/fixtures/*"],
+            "@/helpers/*": ["src/helpers/*"],
+            "@/lib/*": ["src/lib/*"],
+            "@/providers/*": ["src/providers/*"],
+            "@/services/*": ["src/services/*"],
+            "@/types/*": ["src/types/*"],
+            "@/utils/*": ["src/utils/*"],
+            
         },
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,

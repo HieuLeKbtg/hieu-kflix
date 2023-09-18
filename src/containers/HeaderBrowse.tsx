@@ -1,7 +1,7 @@
 'use client'
 
 import { appRoutes } from 'app/routes'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import {
     Header,
@@ -18,15 +18,12 @@ import {
     HeaderSearch,
     HeaderText
 } from 'src/components'
-import localStorageHelper from 'src/helpers/LocalStorageHelper'
-import { User } from 'src/types'
 
 const HeaderBrowse = () => {
     const pathname = usePathname()
 
-    const user: User = localStorageHelper.getUserInfo()
     const [searchTerm, setSearchTerm] = useState<string>('')
-
+    const router = useRouter()
     return (
         <Header src='joker1'>
             <>
@@ -58,18 +55,20 @@ const HeaderBrowse = () => {
                                 <HeaderGroup>
                                     <HeaderPicture src='2' />
                                     <HeaderLink href='#'>
-                                        {user.firstName}
+                                        {/* {user.firstName} */}
                                     </HeaderLink>
                                 </HeaderGroup>
                                 <HeaderGroup>
-                                    <HeaderLink
-                                        href={appRoutes.HOME}
-                                        onClick={() =>
-                                            localStorageHelper.removeUserInfo()
-                                        }
+                                    <button
+                                        onClick={() => {
+                                            // localStorageHelper.setUserInfo(
+                                            //     DEFAULT_USER
+                                            // )
+                                            router.push(appRoutes.HOME)
+                                        }}
                                     >
                                         Sign out
-                                    </HeaderLink>
+                                    </button>
                                 </HeaderGroup>
                             </HeaderDropdown>
                         </HeaderProfile>
