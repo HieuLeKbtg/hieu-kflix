@@ -9,10 +9,10 @@ import {
     HeaderPicture,
     HeaderProfile
 } from '../../../components'
+import SearchBox from './SearchBox'
 import SignOutBtn from './SignOutBtn'
 
 const RightNavHeader = async () => {
-    // const [searchTerm, setSearchTerm] = useState<string>('')
     const session = await getServerSession()
     const { name, email } = session.user
 
@@ -22,10 +22,7 @@ const RightNavHeader = async () => {
 
     return (
         <HeaderGroup>
-            {/* <HeaderSearch
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-            /> */}
+            <SearchBox />
             <HeaderProfile>
                 <HeaderPicture src='2' />
                 <HeaderDropdown>

@@ -1,4 +1,5 @@
 import { ResponseListType } from './general'
+import { Genres } from './genres'
 
 export type Film = {
     adult: boolean
@@ -15,6 +16,15 @@ export type Film = {
     video: boolean
     vote_average: number
     vote_count: number
+}
+
+export type FilmStates = {
+    id: number
+    title: string
+    description: string
+    backdrop_path: string
+    poster_path: string
+    genres: Genres[]
 }
 
 export type ResponseFilms = ResponseListType<Film>

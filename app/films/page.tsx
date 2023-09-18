@@ -1,29 +1,27 @@
 import MainFooter from 'src/containers/footer'
 import SlideRows from 'src/containers/SlideRows'
 import { configServices, filmServices, genreServices } from 'src/services'
-import { ResponseConfiguration, ResponseFilms, ResponseGenres } from 'src/types'
+import { FilmStates, ResponseConfiguration, ResponseGenres } from 'src/types'
 
 import AuthHeader from '@/containers/header/authHeader'
 
-const Films = async () => {
-    const responseFilmsResult: ResponseFilms =
-        await filmServices.getPopularFilms()
+type FilmsProps = {
+    searchParams: Record<PropertyKey, string>
+}
+
+const Films = async (props: FilmsProps) => {
+    const { searchParams } = props
     const genreResult: ResponseGenres = await genreServices.getGenreMoveList()
+    const filmList: FilmStates[] = await filmServices.getPopularFilms(
+        genreResult.genres
+    )
+
+    const searchedFilmList: FilmStates[] = await filmServices.searchFilms(
+        searchParams?.search ?? '',
+        genreResult.genres
+    )
 
     const configResult: ResponseConfiguration = await configServices.getDetail()
-
-    const filmList = responseFilmsResult?.results?.map((film) => {
-        return {
-            id: film.id,
-            title: film.title,
-            description: film.overview,
-            backdrop_path: film.backdrop_path,
-            poster_path: film.poster_path,
-            genres: genreResult.genres.filter((item) =>
-                film.genre_ids.includes(item.id)
-            )
-        }
-    })
 
     return (
         <>
@@ -32,7 +30,7 @@ const Films = async () => {
             <SlideRows
                 category='films'
                 imageConfigs={configResult.images}
-                data={filmList}
+                data={searchedFilmList.length ? searchedFilmList : filmList}
             />
 
             <MainFooter />

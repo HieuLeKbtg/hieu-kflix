@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 
@@ -288,6 +289,8 @@ export const HeaderLogo = ({ to, ...restProps }) => {
 
 export const HeaderSearch = ({ searchTerm, setSearchTerm, ...restProps }) => {
     const [searchActive, setSearchActive] = useState(false)
+    const pathname = usePathname()
+    const router = useRouter()
 
     return (
         <Search {...restProps}>
@@ -303,6 +306,13 @@ export const HeaderSearch = ({ searchTerm, setSearchTerm, ...restProps }) => {
                 placeholder='Search films and series'
                 active={searchActive}
                 data-testid='search-input'
+                onKeyDown={(e) => {
+                    if (e.key !== 'Enter') return
+                    const newPathname = searchTerm
+                        ? `${pathname}?search=${searchTerm}`
+                        : pathname
+                    router.push(newPathname)
+                }}
             />
         </Search>
     )
