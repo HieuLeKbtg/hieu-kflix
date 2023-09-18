@@ -1,5 +1,4 @@
-import { ResponseListType } from './general'
-import { Genres } from './genres'
+import { ContentStates, ResponseListType } from './general'
 
 export type Series = {
     backdrop_path: string
@@ -17,13 +16,6 @@ export type Series = {
     vote_count: number
 }
 
-export type SeriesStates = {
-    id: number
-    title: string
-    description: string
-    backdrop_path: string
-    poster_path: string
-    genres: Genres[]
-}
+export type SeriesStates = ContentStates
 
 export type ResponseSeries = ResponseListType<Series>

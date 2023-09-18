@@ -1,9 +1,5 @@
 'use client'
-import React, {
-    createContext,
-    useContext,
-    useState
-} from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import styled from 'styled-components/macro'
 
 export const CardTitle = styled.p`
@@ -226,21 +222,19 @@ export const MainCardItem = ({ item, children, ...restProps }) => {
 }
 
 export const MainCardFeature = (props) => {
-    const { children, url, genres, ...restProps } = props
-    const { showFeature, itemFeature, setShowFeature } =
-        useContext(FeatureContext)
+    const { children, url, item, onClose, ...restProps } = props
 
-    const genresTextNode = genres.reduce((total, current) => {
+    const genresTextNode = item.genres.reduce((total, current) => {
         if (!total) return current.name
         return (total = `${total}, ${current.name}`)
     }, '')
 
-    return showFeature ? (
+    return (
         <CardFeature {...restProps} src={url}>
             <CardContent>
-                <CardFeatureTitle>{itemFeature.title}</CardFeatureTitle>
-                <CardFeatureText>{itemFeature.description}</CardFeatureText>
-                <CardFeatureClose onClick={() => setShowFeature(false)}>
+                <CardFeatureTitle>{item.title}</CardFeatureTitle>
+                <CardFeatureText>{item.description}</CardFeatureText>
+                <CardFeatureClose onClick={onClose}>
                     <img src='/images/icons/close.png' alt='Close' />
                 </CardFeatureClose>
 
@@ -257,5 +251,5 @@ export const MainCardFeature = (props) => {
                 {children}
             </CardContent>
         </CardFeature>
-    ) : null
+    )
 }

@@ -14,11 +14,12 @@ import SignOutBtn from './SignOutBtn'
 
 const RightNavHeader = async () => {
     const session = await getServerSession()
-    const { name, email } = session.user
 
     if (!session) {
         redirect(appRoutes.HOME)
     }
+
+    const { name, email } = session.user
 
     return (
         <HeaderGroup>

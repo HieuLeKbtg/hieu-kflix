@@ -17,23 +17,27 @@ import {
 } from 'src/components'
 import { seriesServices } from 'src/services'
 import { filmServices } from 'src/services/FilmServices'
-import { Genres, ImageConfigs } from 'src/types'
+import { ContentStates, ImageConfigs } from 'src/types'
 
 type SlideRowsProps = {
     category: 'series' | 'films'
     imageConfigs: ImageConfigs
-    data: {
-        id: number
-        title: string
-        description: string
-        backdrop_path: string
-        poster_path: string
-        genres: Genres[]
-    }[]
+    data: ContentStates[]
+}
+
+const DEFAULT_ITEM: ContentStates = {
+    id: -1,
+    title: '',
+    description: '',
+    backdrop_path: '',
+    poster_path: '',
+    genres: []
 }
 
 const SlideRows = (props: SlideRowsProps) => {
     const { category, imageConfigs, data } = props
+    const [item, setItem] = useState<ContentStates>(DEFAULT_ITEM)
+
     const [videoKey, setVideoKey] = useState<string>('')
 
     const getVideokey = async (id: number) => {
@@ -48,8 +52,6 @@ const SlideRows = (props: SlideRowsProps) => {
         }
     }
 
-    // TODO: 1 MainCardFeature here
-
     return (
         <CardGroup
             flexDirection='row'
@@ -57,7 +59,12 @@ const SlideRows = (props: SlideRowsProps) => {
             justifyContent='space-evenly'
         >
             {data?.map((slideItem) => (
-                <Card key={slideItem.id}>
+                <Card
+                    onClick={() => {
+                        setItem(slideItem)
+                    }}
+                    key={slideItem.id}
+                >
                     <CardTitle>{slideItem.title}</CardTitle>
                     <CardEntities>
                         <MainCardItem key={slideItem.id} item={slideItem}>
@@ -69,23 +76,26 @@ const SlideRows = (props: SlideRowsProps) => {
                             </CardMeta>
                         </MainCardItem>
                     </CardEntities>
-                    <MainCardFeature
-                        genres={slideItem.genres}
-                        url={`${imageConfigs.secure_base_url}/original/${slideItem.poster_path}`}
-                    >
-                        <Player>
-                            <PlayerButton
-                                onClick={() => getVideokey(slideItem.id)}
-                            />
-                            {videoKey ? (
-                                <PlayerVideo
-                                    src={`https://www.youtube.com/embed/${videoKey}`}
-                                />
-                            ) : null}
-                        </Player>
-                    </MainCardFeature>
                 </Card>
             ))}
+
+            {item.id !== -1 ? (
+                <MainCardFeature
+                    genres={item.genres}
+                    item={item}
+                    url={`${imageConfigs.secure_base_url}/original/${item.poster_path}`}
+                    onClose={() => setItem(DEFAULT_ITEM)}
+                >
+                    <Player>
+                        <PlayerButton onClick={() => getVideokey(item.id)} />
+                        {videoKey ? (
+                            <PlayerVideo
+                                src={`https://www.youtube.com/embed/${videoKey}`}
+                            />
+                        ) : null}
+                    </Player>
+                </MainCardFeature>
+            ) : null}
         </CardGroup>
     )
 }

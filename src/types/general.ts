@@ -1,3 +1,5 @@
+import { Genres } from './genres'
+
 export type ResponseListType<T> = {
     page: number
     results: T[]
@@ -21,4 +23,13 @@ export type Video = {
 export type ResponseVideo = {
     id: number
     results: Video[]
+}
+
+export type ContentStates = {
+    id: number
+    title: string
+    description: string
+    backdrop_path: string
+    poster_path: string
+    genres: Genres[]
 }
