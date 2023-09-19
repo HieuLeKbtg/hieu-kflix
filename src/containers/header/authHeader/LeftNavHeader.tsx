@@ -15,10 +15,10 @@ const LeftNavHeader = () => {
                 src='/images/icons/logo.svg'
                 alt='Netflix'
             />
-            <HeaderLink active={pathname === '/series'} href='/series'>
+            <HeaderLink $active={pathname === '/series'} href='/series'>
                 Series
             </HeaderLink>
-            <HeaderLink active={pathname === '/films'} href='films'>
+            <HeaderLink $active={pathname === '/films'} href='films'>
                 Films
             </HeaderLink>
         </HeaderGroup>

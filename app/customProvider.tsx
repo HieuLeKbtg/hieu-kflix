@@ -6,7 +6,7 @@ import isPropValid from '@emotion/is-prop-valid'
 import { ReactNode } from 'react'
 import { StyleSheetManager } from 'styled-components'
 
-import StyledComponentsRegistry from '@/lib/styledComponentRegistry'
+import { StyledComponentsRegistry } from '@/lib/styledComponentRegistry'
 
 import GlobalStyles from './globalStyles'
 

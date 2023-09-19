@@ -141,8 +141,6 @@ export const AccordionHeader = ({ children, ...restProps }) => {
 export const AccordionBody = ({ children, ...restProps }) => {
     const { toggleShow } = useContext(ToggleContext)
 
-    /* return toggleShow ? <Body {...restProps}>{children}</Body> : null; */
-
     return (
         <Body className={toggleShow ? 'open' : 'closed'} {...restProps}>
             <span>{children}</span>

@@ -28,19 +28,20 @@ export const CardContainer = styled.div`
 `
 
 export const CardGroup = styled.div<{
-    flexDirection?: string
-    alignItems?: string
-    justifyContent?: string
+    $flexDirection?: string
+    $alignItems?: string
+    $justifyContent?: string
     margin?: string
-    flexWrap?: string
+    $flexWrap?: string
 }>`
     display: flex;
-    flex-direction: ${({ flexDirection }) =>
-        flexDirection === 'row' ? 'row' : 'column'};
-    ${({ alignItems }) => alignItems && `align-items: ${alignItems}`};
+    flex-direction: ${({ $flexDirection }) =>
+        $flexDirection === 'row' ? 'row' : 'column'};
+    ${({ $alignItems }) => $alignItems && `align-items: ${$alignItems}`};
     ${({ margin }) => margin && `margin: ${margin}`};
-    flex-wrap: ${({ flexWrap }) => flexWrap || 'nowrap'};
-    justify-content: ${({ justifyContent }) => justifyContent || 'flex-start'};
+    flex-wrap: ${({ $flexWrap }) => $flexWrap || 'nowrap'};
+    justify-content: ${({ $justifyContent }) =>
+        $justifyContent || 'flex-start'};
 `
 
 export const CardSubTitle = styled.p`
@@ -240,8 +241,8 @@ export const MainCardFeature = (props) => {
 
                 <CardGroup
                     margin='18px 0'
-                    flexDirection='row'
-                    alignItems='center'
+                    $flexDirection='row'
+                    $alignItems='center'
                 >
                     <CardFeatureText fontWeight='bold'>
                         {genresTextNode}

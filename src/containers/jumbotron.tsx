@@ -9,7 +9,7 @@ import {
 } from 'src/components/jumbotron'
 import { jumboData } from 'src/fixtures'
 
-export default function MainJumbotron() {
+export function MainJumbotron() {
     return (
         <JumbotronContainer>
             {jumboData.map((item) => (

@@ -4,7 +4,7 @@
         "babel-plugin-macros",
         [
             "babel-plugin-styled-components",
-            { "ssr": false, "displayName": false }
+            { "ssr": true, "displayName": false }
         ]
     ]
 }

@@ -35,7 +35,7 @@ const DEFAULT_ITEM: ContentStates = {
     genres: []
 }
 
-const SlideRows = (props: SlideRowsProps) => {
+export const SlideRows = (props: SlideRowsProps) => {
     const { category, imageConfigs, data, dataOnBrowse } = props
     const [item, setItem] = useState<ContentStates>(DEFAULT_ITEM)
 
@@ -123,9 +123,9 @@ const SlideRows = (props: SlideRowsProps) => {
     return (
         <>
             <CardGroup
-                flexDirection='row'
-                flexWrap='wrap'
-                justifyContent='space-evenly'
+                $flexDirection='row'
+                $flexWrap='wrap'
+                $justifyContent='space-evenly'
                 ref={slideItemRef}
             >
                 {renderList(dataOnBrowse || data)}
@@ -155,5 +155,3 @@ const SlideRows = (props: SlideRowsProps) => {
         </>
     )
 }
-
-export default SlideRows

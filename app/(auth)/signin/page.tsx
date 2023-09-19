@@ -2,7 +2,7 @@ import { appRoutes } from 'app/routes'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 import React from 'react'
-import MainFooter from 'src/containers/footer'
+import { MainFooter } from 'src'
 
 import PublicHeader from '@/containers/header/publicHeader'
 

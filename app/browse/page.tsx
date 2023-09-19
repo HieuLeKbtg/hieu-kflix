@@ -12,9 +12,9 @@ import {
     SeriesStates
 } from 'src'
 
-import MainFooter from '@/containers/footer'
+import { MainFooter } from '@/containers/footer'
 import AuthHeader from '@/containers/header/authHeader'
-import SlideRows from '@/containers/SlideRows'
+import { SlideRows } from '@/containers/SlideRows'
 
 type BrowseContainerProps = {
     searchParams: Record<PropertyKey, string>

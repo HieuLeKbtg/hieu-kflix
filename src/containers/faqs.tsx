@@ -16,7 +16,7 @@ import {
 } from 'src/components/opt-form'
 import { faqData } from 'src/fixtures'
 
-export default function FaqsContainer() {
+export function FaqsContainer() {
     return (
         <MainAccordion>
             <AccordionTitle>Frequently Asked Questions</AccordionTitle>

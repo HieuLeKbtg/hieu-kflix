@@ -9,7 +9,7 @@ import {
     FooterTitle
 } from 'src/components/footer'
 
-export default function MainFooter() {
+export function MainFooter() {
     return (
         <FooterContainer>
             <FooterTitle>Questions? Contact us.</FooterTitle>

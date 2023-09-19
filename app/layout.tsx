@@ -1,5 +1,4 @@
 import { getServerSession } from 'next-auth'
-// import { SessionProvider } from 'next-auth/react'
 import { ReactNode } from 'react'
 import { SessProvider } from 'src'
 
@@ -19,7 +18,7 @@ export default async function RootLayout({
             {/* <Head>
                 <Partytown debug={true} forward={['dataLayer.push']} />
             </Head> */}
-            <body>
+            <body suppressHydrationWarning>
                 <SessProvider session={session}>
                     <CustomProvider>
                         <GlobalLayout>{children}</GlobalLayout>

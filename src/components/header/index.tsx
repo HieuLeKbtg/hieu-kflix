@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
 type HeaderBgProps = {
     src?: string
@@ -48,11 +48,11 @@ export const HeaderContainer = styled.div`
     }
 `
 
-export const HeaderLink = styled(Link)<{ active?: boolean }>`
+export const HeaderLink = styled(Link)<{ $active?: boolean }>`
     color: #fff;
     text-decoration: none;
     margin-right: 30px;
-    font-weight: ${({ active }) => (active === true ? '700' : 'normal')};
+    font-weight: ${({ $active }) => ($active === true ? '700' : 'normal')};
     cursor: pointer;
 
     &:hover {
@@ -69,7 +69,7 @@ export const HeaderGroup = styled.div`
     align-items: center;
 `
 
-export const SearchInput = styled.input<{ active: boolean }>`
+export const SearchInput = styled.input<{ $active: boolean }>`
     background-color: rgba(64, 64, 64, 0.5);
     color: white;
     border: 1px solid white;
@@ -77,10 +77,10 @@ export const SearchInput = styled.input<{ active: boolean }>`
     height: 30px;
     font-size: 14px;
     border-radius: 4px;
-    margin-left: ${({ active }) => (active === true ? '10px' : '0')};
-    padding: ${({ active }) => (active === true ? '0 10px' : '0')};
-    opacity: ${({ active }) => (active === true ? '1' : '0')};
-    width: ${({ active }) => (active === true ? '200px' : '0px')};
+    margin-left: ${({ $active }) => ($active === true ? '10px' : '0')};
+    padding: ${({ $active }) => ($active === true ? '0 10px' : '0')};
+    opacity: ${({ $active }) => ($active === true ? '1' : '0')};
+    width: ${({ $active }) => ($active === true ? '200px' : '0px')};
 
     &:focus {
         background-color: rgba(0, 0, 0, 0.8);
@@ -304,7 +304,7 @@ export const HeaderSearch = ({ searchTerm, setSearchTerm, ...restProps }) => {
                 value={searchTerm}
                 onChange={({ target }) => setSearchTerm(target.value)}
                 placeholder='Search films and series'
-                active={searchActive}
+                $active={searchActive}
                 data-testid='search-input'
                 onKeyDown={(e) => {
                     if (e.key !== 'Enter') return

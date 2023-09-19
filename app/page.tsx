@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 import React from 'react'
+import { FaqsContainer, MainFooter, MainJumbotron } from 'src'
 import {
     FeatureContainer,
     FeatureSubTitle,
@@ -11,9 +12,6 @@ import {
     OptFormInput,
     OptFormText
 } from 'src/components'
-import FaqsContainer from 'src/containers/faqs'
-import MainFooter from 'src/containers/footer'
-import MainJumbotron from 'src/containers/jumbotron'
 
 import PublicHeader from '@/containers/header/publicHeader'
 
